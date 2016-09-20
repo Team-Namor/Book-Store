@@ -1,0 +1,14 @@
+{
+  "name": "team-namor",
+  "description": "Telerik Software Academy Team Work - JS Applications",
+  "main": "index.js",
+  "authors": [
+    "team-namor"
+  ],
+  "license": "ISC",
+  "homepage": "",
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "handlebars": "^4.0.5"
+  }
+}

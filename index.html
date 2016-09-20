@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link href="./public/bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+    <title>Book Store Main</title>
+</head>
+
+<body>
+    <div id="wrapper">
+        <input id="input">
+        <button id="add-btn">Add</button>
+        <button id="list-btn">List Items</button>
+
+        <ul id="list"></ul>
+    </div>
+
+    <script src='./node_modules/systemjs/dist/system.js'></script>
+    <script src="./app/scripts/systemjs-config.js"></script>
+    <script>
+        System.import('main');
+    </script>
+</body>
+
+</html>
