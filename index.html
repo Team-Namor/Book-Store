@@ -4,16 +4,26 @@
 <head>
     <meta charset="UTF-8">
     <link href="./public/bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
-    <title>Book Store Main</title>
+    <link href="./public/style/style.css" rel="stylesheet">
+    <title>Book Store </title>
 </head>
 
 <body>
-    <div id="wrapper">
-        <input id="input">
-        <button id="add-btn">Add</button>
-        <button id="list-btn">List Items</button>
+    <div id="main-wrapper" class="container">
+        <header class="container ">
+            <h1 class="display-1">BOOK STORE</h1>
+        </header>
+        <nav class="navbar navbar-full">
+            <ul class="nav  nav-tabs">
+                <li class="nav-item "><a href="#link1" class="nav-link" data-toggle="tab">LINK1</a></li>
+                <li class="nav-item"><a href="#link2" class="nav-link" data-toggle="tab">LINK2</a></li>
+                <li class="nav-item"><a href="#link3" class="nav-link" data-toggle="tab">LINK3</a></li>
+            </ul>
+        </nav>
+        <div class="container" id="sammy-app">
+           
 
-        <ul id="list"></ul>
+        </div>
     </div>
 
     <script src='./node_modules/systemjs/dist/system.js'></script>
@@ -21,6 +31,7 @@
     <script>
         System.import('main');
     </script>
+
 </body>
 
 </html>
