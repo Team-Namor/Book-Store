@@ -7,6 +7,6 @@ SystemJS.config({
         'data': './app/scripts/data.js',
         'jquery': './node_modules/jquery/dist/jquery.js',
         'bootstrap-utils': './public/bower_components/bootstrap/js/dist/util.js',
-        'bootsrap-tabs': './public/bower_components/bootstrap/js/dist/tab.js'
+        'bootstrap-tabs': './public/bower_components/bootstrap/js/dist/tab.js'
     }
 });
