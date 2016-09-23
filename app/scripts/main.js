@@ -16,8 +16,12 @@ nav.on('click','a',ev => {
 
 let app = new Sammy('#sammy-app');
 
-app.get('#/', function (context) {
-    context.$element().html('MAIN')
+app.get('#/', function (con) {
+        template.get('link').then(temp => {
+        let html = temp({ name: 'MAIN' })
+
+        con.$element().html(html);
+    });
 })
 
 app.get('#link1', con => {
