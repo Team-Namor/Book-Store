@@ -48,4 +48,13 @@ app.get('#link3', con => {
     });
 });
 
+/* Login and registration routes */
+app.get('#register', con => {
+    template.get('register').then(temp => {
+        let html = temp({ name: 'REGISTER' })
+
+        con.$element().html(html);
+    });
+});
+
 app.run('#/')
