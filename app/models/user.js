@@ -1,9 +1,20 @@
+const getId = (function() {
+    let id = 0;
+
+    return function() {
+        id += 1;
+        return id;
+    };
+}());
+
 export class User {
-    constructor(firstName, lastName, gender, age) {
+
+    constructor(firstName, lastName, email, password) {
+        this.id = getId();
         this.firstName = firstName;
         this.lastName = lastName;
-        this.gender = gender;
-        this.age = age;
+        this.email = email;
+        this.password = password;
     }
 
     get firstName() {
@@ -22,19 +33,19 @@ export class User {
         this._lastName = value;
     }
 
-    get gender() {
-        return this._gender;
+    get email() {
+        return this._email;
     }
 
-    set gender(value) {
-        this._gender = value;
+    set email(value) {
+        this._email = value;
     }
 
-    get age() {
-        return this._age;
+    get password() {
+        return this._password;
     }
 
-    set age(value) {
-        this._age = value;
+    set password(value) {
+        this._password = value;
     }
 }
