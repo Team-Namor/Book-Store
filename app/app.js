@@ -1,6 +1,8 @@
 'use strict';
+require('./utils/rootRequire')();
+
 let express = require('express'),
-    db = require('../db/db'),
+    db = rootRequire('../db/db'),
     bodyParser = require('body-parser');
 
 let app = express();
