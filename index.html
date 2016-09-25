@@ -3,8 +3,6 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width"/>
-    <meta name="viewport" content="height=device-height"/>
     <link href="./public/bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
     <link href="./public/style/style.css" rel="stylesheet">
     <title>Book Store </title>
@@ -14,17 +12,23 @@
     <div id="main-wrapper" class="container">
         <header class="container ">
             <h1 class="display-1">BOOK STORE</h1>
+
         </header>
-        <nav class="navbar navbar-full">
-            <ul class="nav  nav-tabs" role="tablist">
-                <li class="nav-item "><a role="tab"  href="#link1" class="nav-link" data-toggle="tab">LINK1</a></li>
-                <li class="nav-item"><a role="tab" href="#link2" class="nav-link" data-toggle="tab">LINK2</a></li>
-                <li class="nav-item"><a role="tab" href="#link3" class="nav-link" data-toggle="tab">LINK3</a></li>
-                <li class="nav-item"><a role="tab" href="#register" class="nav-link" data-toggle="tab">Register</a></li>
-            </ul>
+        <nav class="container navbar">
+            <div class="row">
+                <ul class="nav nav-pills pull-xs-left" >
+                    <li class="nav-item "><a  href="#books" class="background-transparent nav-link" >Books</a></li>
+                    <li class="nav-item"><a  href="##categories" class="background-transparent nav-link" >Categories</a></li>
+                    <li class="nav-item"><a  href="#link3" class="background-transparent nav-link" >LINK3</a></li>
+                </ul>
+                <div class=" pull-xs-right">
+                    <a class="btn btn-info" href="#Login">Login</a>
+                    <a class="btn btn-danger" href="#Register">Register</a>
+                </div>                   
+            </div>
         </nav>
-        <div class="container" id="sammy-app">
-           
+        <div class="background-transparent container" id="sammy-app">
+
 
         </div>
     </div>
