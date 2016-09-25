@@ -24,17 +24,17 @@ app.get('#/', function (con) {
     });
 })
 
-app.get('#link1', con => {
+app.get('#books', con => {
     template.get('link').then(temp => {
-        let html = temp({ name: 'LINK1' })
+        let html = temp({ name: 'BOOKS' })
 
         con.$element().html(html);
     });
 });
 
-app.get('#link2', con => {
+app.get('#categories', con => {
     template.get('link').then(temp => {
-        let html = temp({ name: 'LINK2' })
+        let html = temp({ name: 'CATEGORIES' })
 
         con.$element().html(html);
     });

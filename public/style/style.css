@@ -6,3 +6,19 @@ html{
 .bg-transperant{
     background-color: transparent
 }
+
+.background-transparent{
+    background: rgba(0, 0, 0, 0.1)
+}
+#sammy-app, .background-transparent.active{
+    background: rgba(0, 0, 0, 0.3)!important;
+    
+}
+
+.display-none{
+    display: none;
+}
+
+.navbar{
+    padding-bottom: 0;
+}
