@@ -6,8 +6,8 @@ let express = require('express'),
 let app = express();
 
 app.use(bodyParser.json());
+app.use(express.static('./node_modules'));
 app.use(express.static('./public'));
-app.use(express.static('../node_modules'));
 
 app.get('/books', bookController.get);
 
