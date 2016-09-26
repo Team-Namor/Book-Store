@@ -1,29 +1,26 @@
 'use strict';
 let express = require('express'),
+    db = rootRequire('../db/data'),
     bodyParser = require('body-parser'),
-    app = express(),
-    db = require('../config/db');
+    bookController = require('./controllers/booksController')
 
 app.use(bodyParser.json());
-app.use(express.static('./'));
+app.use(express.static('./public'));
+app.use(express.static('../node_modules'));
 
-module.exports.database = db;
+app.get('/books',bookController.get);
+
+app.post('/books', function(req, res){
+    let book = req.body;
+    db.books.insert(book, function(err, newBook){
+        res.send(newBook)
+    })
+})
 
 var port = 3333;
 app.listen(port, function () {
     console.log(`Server is running at http://localhost:${port}`);
 });
 
-/* Backend Router */
-app.post('/register', function (req, res) {
-    var newUser = {
-        firstname: userData['firstname'],
-        lastname: userData['lastname'],
-        email: userData['email'],
-        password: userData['password']
-    };
-    
-    db.users.insert(newUser, function (err, newUser) {});
 
-    res.send('POST request to the homepage');
-});
+
