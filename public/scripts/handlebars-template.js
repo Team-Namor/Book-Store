@@ -5,7 +5,7 @@ export  default {
     get(name){
         return new Promise((resolve, reject) => {
             $.ajax({
-                url: `../handlebars-templates/${name}-template.handlebars`,
+                url: `../views/${name}-template.handlebars`,
                 success: html => {
                     let template = handlebars.compile(html);
 

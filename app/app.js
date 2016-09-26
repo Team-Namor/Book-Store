@@ -1,8 +1,9 @@
 'use strict';
 let express = require('express'),
-    db = rootRequire('../db/data'),
     bodyParser = require('body-parser'),
-    bookController = require('./controllers/booksController')
+    bookController = require('./controllers/booksController');
+
+let app = express();
 
 app.use(bodyParser.json());
 app.use(express.static('./public'));
@@ -15,6 +16,13 @@ app.post('/books', function(req, res){
     db.books.insert(book, function(err, newBook){
         res.send(newBook)
     })
+})
+
+app.post('/register', function(req,res) {
+    let user = req.body;
+    user.isFromServer = true;
+
+    res.json(user);
 })
 
 var port = 3333;

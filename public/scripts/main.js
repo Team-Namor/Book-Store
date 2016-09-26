@@ -3,7 +3,7 @@ import Sammy from 'sammy';
 import template from 'template'
 
 /* Controllers */
-import UserController from 'UserController';
+import UserController from 'scripts/controllers/userController.js';
 
 /* Create controller instance */
 let UC = new UserController();
