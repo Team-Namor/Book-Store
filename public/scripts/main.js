@@ -1,6 +1,7 @@
 import 'jquery'
 import Sammy from 'sammy';
-import template from 'template'
+import template from 'template';
+import requester from 'requester';
 
 /* Controllers */
 import UserController from 'scripts/controllers/userController.js';
@@ -22,19 +23,20 @@ let app = new Sammy('#sammy-app');
 
 app.get('#/', function (con) {
     template.get('link').then(temp => {
-        //  let html = temp({ name: 'MAIN' })
+        let html = temp({ name: 'MAIN' });
 
-        let html = temp(book);
         con.$element().html(html);
     });
 });
 
 app.get('#books', con => {
-    template.get('link').then(temp => {
-        let html = temp({ name: 'BOOKS' })
-
-        con.$element().html(html);
-    });
+    Promise.all([requester.get('/books'), template.get('book')])
+        .then(([data, template]) => {
+            let html = template(data);
+            con.$element().html(html);
+        });
+    // template.get('book').then(temp => {
+    //     let html = temp({ name: 'BOOKS' });
 });
 
 app.get('#categories', con => {

@@ -1,24 +1,33 @@
 class Book{
-    constructor(name, description, ownerId){
-        this.name = name;
-        this.description = description;
+    constructor(title, author, year, ownerId){
+        this.title = title;
+        this.author = author;
+        this.year = year;
         this.ownerId = ownerId;
     }
 
-    get name(){
-        return this._name
+    get title(){
+        return this._title;
     }
 
-    set name(value){
-        this._name = value;
+    set title(value){
+        this._title = value;
     }
 
-    get description(){
-        return this._description
+    get author(){
+        return this._author;
     }
 
-    set description(value){
-        this._description = value;
+    set author(value){
+        this._author = value;
+    }
+
+    get year(){
+        return this._year;
+    }
+
+    set year(value){
+        this._author = year;
     }
 
     get ownerId(){
