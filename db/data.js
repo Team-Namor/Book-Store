@@ -55,13 +55,24 @@ let data = {
     },
 
     addUser(user) {
-        console.dir(user);
         return new Promise ((resolve, reject) => {
             db.users.insert(user, function(err, newUser) {
                 if (err) {
                     reject(err);
                 } else {
                     resolve(user);
+                }
+            });
+        });
+    },
+
+    getUser(userId) {
+        return new Promise ((resolve, reject) => {
+            db.users.find({_id: userId}, (err, books) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(books);
                 }
             });
         });

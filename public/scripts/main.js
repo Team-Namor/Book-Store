@@ -52,7 +52,7 @@ app.get('#link3', con => {
     });
 });
 
-/* Login and registration routes */
+/* Register user */
 app.get('#Register', con => {
     template.get('register').then(temp => {
         let html = temp({ name: 'REGISTER' })
@@ -63,6 +63,19 @@ app.get('#Register', con => {
 
 app.post('#Register', con => {
     UC.add(con.params);
+});
+
+/* Login user */
+app.get('#Login', con => {
+    template.get('login').then(temp => {
+        let html = temp({ name: 'LOGIN' })
+
+        con.$element().html(html);
+    });
+});
+
+app.post('#Login', con => {
+    UC.login(con.params);
 });
 
 app.run('#/')

@@ -3,14 +3,6 @@ import template from 'template';
 
  class UserController {
     constructor(){
-       
-    }
-
-    index() {
-      
-    }
-
-    get(id) {
 
     }
 
@@ -18,6 +10,12 @@ import template from 'template';
         requester.post('/register', userData)
             .then(data => console.log(data))
             .catch(err => console.log(err))
+    }
+
+    login(userData) {
+       requester.post('/login', userData)
+           .then(data => console.log(data))
+           .catch(err => console.log(err))
     }
 
     edit() {

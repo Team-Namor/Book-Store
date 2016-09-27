@@ -9,6 +9,7 @@ let usersController = {
     add(req, res) {
         let userData = req.body;
 
+        //todo validation
         let user = new User(
             userData['firstname'],
             userData['lastname'],
@@ -21,6 +22,10 @@ let usersController = {
             .catch(err => {
                 res.status(500).send(err.message);
             });
+    },
+
+    login(req, res) {
+        
     }
 };
 
