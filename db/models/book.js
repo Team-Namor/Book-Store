@@ -1,41 +1,49 @@
-class Book{
-    constructor(title, author, year, ownerId){
+const getId = (function () {
+    let id = 0;
+
+    return function () {
+        id += 1;
+        return id;
+    };
+} ());
+
+export class Book {
+    constructor(title, author, year, ownerId) {
+        this.id = getId();
         this.title = title;
         this.author = author;
         this.year = year;
         this.ownerId = ownerId;
     }
 
-    get title(){
+    get title() {
         return this._title;
     }
 
-    set title(value){
+    set title(value) {
         this._title = value;
     }
 
-    get author(){
+    get author() {
         return this._author;
     }
 
-    set author(value){
+    set author(value) {
         this._author = value;
     }
 
-    get year(){
+    get year() {
         return this._year;
     }
 
-    set year(value){
+    set year(value) {
         this._author = year;
     }
 
-    get ownerId(){
+    get ownerId() {
         return this._ownerId;
     }
-    set ownerId(value){
+    set ownerId(value) {
         this._ownerId = value;
     }
 }
-
-module.export  = Book;

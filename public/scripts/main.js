@@ -5,10 +5,12 @@ import requester from 'requester';
 
 /* Controllers */
 import UserController from 'scripts/controllers/userController.js';
+import BookController from 'scripts/controllers/bookController.js';
+
 
 /* Create controller instance */
 let UC = new UserController();
-
+let BC = new BookController();
 
 let nav = $('ul.nav');
 
@@ -30,13 +32,8 @@ app.get('#/', function (con) {
 });
 
 app.get('#books', con => {
-    Promise.all([requester.get('/books'), template.get('book')])
-        .then(([book, template]) => {
-            let obj = {book:[]};
-            book.forEach(b => obj.book.push(b));
-            let html = template(obj);
-            con.$element().html(html);
-        });
+    let element = con.$element();
+   BC.index(element);
 });
 
 app.get('#categories', con => {
