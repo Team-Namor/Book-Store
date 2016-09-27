@@ -2,7 +2,8 @@
 
 let express = require('express'),
     bodyParser = require('body-parser'),
-    bookController = require('./controllers/booksController');
+    bookController = require('./controllers/booksController'),
+    categoryController = require('./controllers/categoryController');
 
 let app = express();
 
