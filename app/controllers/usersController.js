@@ -7,21 +7,19 @@ let usersController = {
     },
     
     add(req, res) {
-        let userData = req.body;
+        let userData = req.body,
+            userType = 'user',
+            firstName = userData['firstname'],
+            lastName = userData['lastname'],
+            email = userData['email'],
+            password = userData['password'];
 
-        //todo validation
-        let user = new User(
-            'user',
-            userData['firstname'],
-            userData['lastname'],
-            userData['email'],
-            userData['password']
-        );
+        let user = new User(userType, firstName, lastName, email, password);
 
         data.addUser(user)
             .then(data => res.json(data))
             .catch(err => {
-                res.status(500).send(err.message);
+                res.send(err);
             });
     },
 

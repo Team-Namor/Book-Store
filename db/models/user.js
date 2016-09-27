@@ -1,3 +1,5 @@
+let validator = require('validator');
+
 class User {
     constructor(userType, firstName, lastName, email, password) {
         this.userType = userType;
@@ -16,6 +18,10 @@ class User {
     }
 
     set userType(value) {
+        if(!validator.equals(value, 'admin') || !validator.equals(value, 'user')) {
+            throw new Error('User type must be admin or user.');
+        }
+
         this._userType = value;
     }
 
@@ -24,6 +30,10 @@ class User {
     }
 
     set firstName(value) {
+        if(!validator.isAlpha(value)) {
+            throw new Error('Firstname must contain only letters.');
+        }
+
         this._firstName = value;
     }
 
@@ -32,6 +42,11 @@ class User {
     }
 
     set lastName(value) {
+        if(!validator.isAlpha(value)) {
+            throw new Error('Lastname must contain only letters.');
+        }
+
+
         this._lastName = value;
     }
 
@@ -40,6 +55,10 @@ class User {
     }
 
     set email(value) {
+        if(!validator.isEmail(value)) {
+            throw new Error('Firstname must contain only letters.');
+        }
+
         this._email = value;
     }
 
@@ -48,7 +67,12 @@ class User {
     }
 
     set password(value) {
+        if(!validator.isAlphanumeric(value)) {
+            throw new Error('Passowrd must be alphanumeric.');
+        }
+
         this._password = value;
     }
 }
+
 module.exports = User;
