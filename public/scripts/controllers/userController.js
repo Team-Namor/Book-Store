@@ -2,7 +2,10 @@ import requester from '../utils/jqueryJSONRequester.js' ;
 import template from 'template';
 
  class UserController {
-    constructor(){}
+    constructor(){
+       
+    }
+
     index() {
       
     }
@@ -12,7 +15,6 @@ import template from 'template';
     }
 
     add(userData) {
-       console.log('client');
         requester.post('/register', userData)
             .then(data => console.log(data))
             .catch(err => console.log(err))

@@ -22,10 +22,8 @@ app.post('/categories', categoryController.post);
 
 app.post('/register', function(req, res) {
     let user = req.body;
-    user.isFromServer = true;
-    console.log('appjs  express router');
-
-    userController.add(user);
+    
+    userController.add(req, res);
 });
 
 var port = 3333;

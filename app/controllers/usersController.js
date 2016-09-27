@@ -7,13 +7,21 @@ let usersController = {
     },
     
     add(req, res) {
-        data.addUser(req.body)
+        let userData = req.body;
+
+        let user = new User(
+            userData['firstname'],
+            userData['lastname'],
+            userData['email'],
+            userData['password']
+        );
+
+        data.addUser(user)
             .then(data => res.json(data))
             .catch(err => {
                 res.status(500).send(err.message);
             });
     }
-
 };
 
 module.exports = usersController;
