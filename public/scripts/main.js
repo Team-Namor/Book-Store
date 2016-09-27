@@ -78,4 +78,9 @@ app.post('#Login', con => {
     UC.login(con.params);
 });
 
+
+app.get('#Admin', con => {
+    UC.login(con.params);
+});
+
 app.run('#/')

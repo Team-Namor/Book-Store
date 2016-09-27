@@ -66,13 +66,25 @@ let data = {
         });
     },
 
-    getUser(userId) {
+    getUserById(userId) {
         return new Promise ((resolve, reject) => {
             db.users.find({_id: userId}, (err, books) => {
                 if (err) {
                     reject(err);
                 } else {
                     resolve(books);
+                }
+            });
+        });
+    },
+
+    checkUserExisting(username, password) {
+        return new Promise ((resolve, reject) => {
+            db.users.findOne({_email: username, _password: password}, (err, user) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(user);
                 }
             });
         });

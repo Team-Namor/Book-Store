@@ -25,7 +25,24 @@ let usersController = {
     },
 
     login(req, res) {
-        
+        let reqUsername = req.body.username,
+            reqPassword = req.body.password;
+
+        let userPromise = data.checkUserExisting(reqUsername, reqPassword);
+
+        userPromise.then(function(value) {
+            let user = value;
+
+            if(user) {
+                req.session.user = user;
+                req.session.success = 'Successfully authenticated';
+                res.redirect('/#admin');
+            }
+            else{
+                req.session.error = 'Authentication failed, please check your credentials';
+                res.redirect('/#login1');
+            }
+        });
     }
 };
 
