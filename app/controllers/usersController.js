@@ -34,13 +34,11 @@ let usersController = {
             let user = value;
 
             if(user) {
-                req.session.user = user;
-                req.session.success = 'Successfully authenticated';
-                res.redirect('/#admin');
+                res.cookie('cookieName', user._id, { maxAge: 900000, httpOnly: true });
+                res.send();
             }
             else{
-                req.session.error = 'Authentication failed, please check your credentials';
-                res.redirect('/#login1');
+                res.send();
             }
         });
     }

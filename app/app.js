@@ -22,12 +22,12 @@ app.use(session({
 
 // Authentication and Authorization Middleware
 function authenticate(req, res, next) {
-    if (req.session.user) {
+    /*if (req.session.user) {
         next();
     } else {
         req.session.error = 'Access denied!';
         res.redirect('/#login');
-    }
+    }*/
 }
 
 app.get('/books', bookController.get);
