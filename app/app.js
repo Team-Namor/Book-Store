@@ -2,6 +2,7 @@
 
 let express = require('express'),
     bodyParser = require('body-parser'),
+    userController = require('./controllers/usersController'),
     bookController = require('./controllers/booksController'),
     categoryController = require('./controllers/categoryController');
 
@@ -19,11 +20,12 @@ app.get('/categories', categoryController.get);
 
 app.post('/categories', categoryController.post);
 
-app.post('/register', function(req,res) {
+app.post('/register', function(req, res) {
     let user = req.body;
     user.isFromServer = true;
+    console.log('appjs  express router');
 
-    res.json(user);
+    userController.add(user);
 });
 
 var port = 3333;

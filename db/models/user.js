@@ -1,20 +1,13 @@
-const getId = (function() {
-    let id = 0;
-
-    return function() {
-        id += 1;
-        return id;
-    };
-}());
-
-export class User {
-
+class User {
     constructor(firstName, lastName, email, password) {
-        this.id = getId();
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
+    }
+
+    get id() {
+        return this._id;
     }
 
     get firstName() {
@@ -49,3 +42,4 @@ export class User {
         this._password = value;
     }
 }
+module.exports = User;
