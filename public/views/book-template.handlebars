@@ -1,0 +1,11 @@
+    <h2>Books in our store</h2>
+    {{#book}}
+    <div class="book col-md-2">
+        <img src="{{imgURL}}" alt="bookCover">
+        <ul class='book-info'>
+            <li> <b>Title: </b><span>{{title}}</span> </li>
+            <li> <b>Author: </b><span>{{author}}</span></li>
+            <li> <b>Year: </b><span>{{year}}</span></li>
+        </ul>
+    </div>
+    {{/book}}

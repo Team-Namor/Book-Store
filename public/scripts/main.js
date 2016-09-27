@@ -11,7 +11,7 @@ let UC = new UserController();
 
 let nav = $('ul.nav');
 
-nav.on('click','a',ev => {
+nav.on('click', 'a', ev => {
     let element = $(ev.target);
 
     nav.find('a').removeClass('active');
@@ -21,9 +21,10 @@ nav.on('click','a',ev => {
 let app = new Sammy('#sammy-app');
 
 app.get('#/', function (con) {
-        template.get('link').then(temp => {
-        let html = temp({ name: 'MAIN' })
+    template.get('link').then(temp => {
+        //  let html = temp({ name: 'MAIN' })
 
+        let html = temp(book);
         con.$element().html(html);
     });
 });
