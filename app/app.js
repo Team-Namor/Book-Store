@@ -14,6 +14,10 @@ app.get('/books', bookController.get);
 
 app.post('/books', bookController.post);
 
+app.get('/categories', categoryController.get);
+
+app.post('/categories', categoryController.post);
+
 app.post('/register', function(req,res) {
     let user = req.body;
     user.isFromServer = true;

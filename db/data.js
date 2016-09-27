@@ -31,6 +31,28 @@ let data = {
             });
         });
 
+    },
+    getCategories() {
+        return new Promise((resolve, reject) => {
+            db.categories.find({}, (err, categories) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(categories);
+                }
+            });
+        });
+    },
+    postCategory(category) {
+        return new Promise((resolve, reject) => {
+            db.categories.insert(category, function (err, newCategory) {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(book);
+                }
+            });
+        });
     }
 };
 module.exports = data;
