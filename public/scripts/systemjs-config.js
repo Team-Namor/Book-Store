@@ -10,6 +10,7 @@ SystemJS.config({
         'bootstrap-tabs': './bower_components/bootstrap/js/dist/tab.js',
         'sammy': './bower_components/sammy/lib/min/sammy-latest.min.js',
         'handlebars': './bower_components/handlebars/handlebars.min.js',
-        'template': './scripts/handlebars-template.js'
+        'template': './scripts/handlebars-template.js',
+        'requester': './scripts/utils/jqueryJSONRequester.js',
     }
 });

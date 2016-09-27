@@ -31,12 +31,12 @@ app.get('#/', function (con) {
 
 app.get('#books', con => {
     Promise.all([requester.get('/books'), template.get('book')])
-        .then(([data, template]) => {
-            let html = template(data);
+        .then(([book, template]) => {
+            let obj = {book:[]};
+            book.forEach(b => obj.book.push(b));
+            let html = template(obj);
             con.$element().html(html);
         });
-    // template.get('book').then(temp => {
-    //     let html = temp({ name: 'BOOKS' });
 });
 
 app.get('#categories', con => {

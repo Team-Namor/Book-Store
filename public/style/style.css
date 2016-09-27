@@ -1,24 +1,40 @@
-html{
+html {
     background: url('images/books.jpg') no-repeat center center fixed black;
     background-size: cover
 }
 
-.bg-transperant{
+.bg-transperant {
     background-color: transparent
 }
 
-.background-transparent{
+.background-transparent {
     background: rgba(0, 0, 0, 0.1)
 }
-#sammy-app, .background-transparent.active{
+
+#sammy-app,
+.background-transparent.active {
     background: rgba(0, 0, 0, 0.3)!important;
-    
 }
 
-.display-none{
+.display-none {
     display: none;
 }
 
-.navbar{
+.navbar {
     padding-bottom: 0;
+}
+
+.book-info {
+    list-style: none;
+    padding: 0;
+}
+
+.book{
+    text-align: left;
+    padding-top: 30px;
+    color: white;
+}
+
+.head-page{
+    color: white;
 }
