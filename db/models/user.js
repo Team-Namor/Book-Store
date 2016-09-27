@@ -1,5 +1,6 @@
 class User {
-    constructor(firstName, lastName, email, password) {
+    constructor(userType, firstName, lastName, email, password) {
+        this.userType = userType;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -8,6 +9,14 @@ class User {
 
     get id() {
         return this._id;
+    }
+
+    get userType() {
+        return this._userType;
+    }
+
+    set userType(value) {
+        this._userType = value;
     }
 
     get firstName() {

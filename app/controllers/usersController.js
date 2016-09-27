@@ -11,6 +11,7 @@ let usersController = {
 
         //todo validation
         let user = new User(
+            'user',
             userData['firstname'],
             userData['lastname'],
             userData['email'],
