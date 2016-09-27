@@ -37,11 +37,11 @@ app.get('#books', con => {
 });
 
 app.get('#categories', con => {
-    template.get('link').then(temp => {
-        let html = temp({ name: 'CATEGORIES' })
-
-        con.$element().html(html);
-    });
+    Promise.all([requester.get('/categories'), template.get('category')])
+        .then(([data, template]) => {
+            let html = template(data);
+            con.$element().html(html);
+        });
 });
 
 app.get('#link3', con => {
