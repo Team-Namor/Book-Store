@@ -5,33 +5,24 @@ import 'jquery';
 class BookController {
     constructor() { }
     index() {
-        let books;
-        return new Promise((resolve, reject) => {
-            requester.get('/books')
-                .then(data => {
-                    books = data;
-                    return template.get('book');
-                }).then((template) => {
-                    let obj = { book: books };
-                    let html = template(obj);
-                    resolve(html);
-                });
-        });
+        return getData('/books');
     }
 
     get(id) {
-
+        return getData('/books/' + id);
     }
 
     searchBy(param) {
-        let foundBooks;
+        let book;
         return new Promise((resolve, reject) => {
             requester.get('/books')
                 .then((data) => {
-                    foundBooks = data.filter(b => b.title.toLowerCase().indexOf(param) > -1 || b.author.toLowerCase().indexOf(param) > -1);
+                    let paramToLower = param.toLowerCase();
+                    book = data.filter(b => b.title.toLowerCase().indexOf(paramToLower) > -1 ||
+                        b.author.toLowerCase().indexOf(paramToLower) > -1);
                     return template.get('book');
                 }).then((templ) => {
-                    let searchedBooksObject = { book: foundBooks };
+                    let searchedBooksObject = { book: book };
                     let html = templ(searchedBooksObject);
                     resolve(html);
                 });
@@ -51,6 +42,21 @@ class BookController {
             // TODO delete books
         });
     }
+}
+
+function getData(url) {
+    let book;
+    return new Promise((resolve, reject) => {
+        requester.get(url)
+            .then(data => {
+                book = data;
+                return template.get('book');
+            }).then((template) => {
+                let obj = { book: book };
+                let html = template(obj);
+                resolve(html);
+            });
+    });
 }
 
 export default BookController;

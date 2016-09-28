@@ -1,6 +1,7 @@
 import 'jquery';
 import Sammy from 'sammy';
 import template from 'template';
+import loadEvents from './utils/load-events.js';
 
 /* Controllers */
 import UserController from 'scripts/controllers/userController.js';
@@ -26,7 +27,6 @@ let app = new Sammy('#sammy-app');
 app.get('#/', function (con) {
     template.get('link').then(temp => {
         let html = temp({ name: 'MAIN' });
-
         con.$element().html(html);
     });
 });
@@ -35,16 +35,20 @@ app.get('#books', con => {
     let element = con.$element();
     BC.index()
         .then(html => {
-            element.html(html);
+            con.$element().html(html);
+            loadEvents(con);
         });
+});
 
-    $('#main-wrapper').on('click', $('#search-btn'), function () {
-        let searchedQuery = $('#search-value').val();
-        if (searchedQuery !== '') {
-            con.redirect(`#search/${searchedQuery}`);
-        }
-
-    });
+app.get('#books/:id', con => {
+    let slashIndex = app.last_location[1].lastIndexOf('/');
+    let bookId = app.last_location[1].substring(slashIndex + 1);
+    BC.get(bookId)
+        .then((html) => {
+            con.$element().html(html); //change html template
+            loadEvents(con);
+            con.redirect(`#books/${bookId}`);
+        });
 });
 
 app.get('#search/?:query', con => {
@@ -53,12 +57,13 @@ app.get('#search/?:query', con => {
 
     BC.searchBy(query).then((html) => {
         con.$element().html(html);
+        loadEvents(con);
     });
 });
 
 app.get('#categories', con => {
     template.get('category').then(temp => {
-        let html = temp({name: 'Categories'})
+        let html = temp({ name: 'Categories' })
 
         con.$element().html(html);
     });

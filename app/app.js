@@ -34,6 +34,8 @@ app.get('/books', bookController.get);
 
 app.post('/books', bookController.add);
 
+app.get('/books/:id', bookController.getById);
+
 app.get('/categories', categoryController.get);
 
 app.post('/categories', categoryController.add);

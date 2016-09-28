@@ -3,9 +3,8 @@
         <input type="text" id="search-value" class="form-control input-sm" maxlength="64" placeholder="Search books" />
         <button type="submit" id="search-btn" class="btn btn-primary btn-sm">Search</button>
     </div>
-    <div id='book-container'>
     {{#book}}
-        <div class="book col-md-2">
+        <div class="book col-md-2" id="{{_id}}">
             <img class="book-cover" src="{{imgURL}}" alt="bookCover">
             <ul class='book-info'>
                 <li> <b>Title: </b><span>{{title}}</span> </li>
@@ -13,5 +12,4 @@
                 <li> <b>Year: </b><span>{{year}}</span></li>
             </ul>
         </div>
-    </div>
     {{/book}}

@@ -7,9 +7,15 @@ let bookController = {
         });
     },
 
+    getById(req, res) {
+        data.getBookById(req).then(book => res.json(book)[0]).catch(err => {
+            res.status(500).send(err.message);
+        });
+    },
+
     add(req, res) {
         let book = req.body;
-        data.postBook(book).then(data => res.json(data)).catch(err => {
+        data.addBook(book).then(data => res.json(data)).catch(err => {
             res.status(500).send(err.message);
         });
     }

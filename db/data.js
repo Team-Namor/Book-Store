@@ -19,7 +19,18 @@ let data = {
             });
         });
     },
-    postBook(book) {
+      getBookById(req) {
+        return new Promise((resolve, reject) => {
+            db.books.find({_id: req.params.id }, (err, book) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(book);
+                }
+            });
+        });
+    },
+    addBook(book) {
         return new Promise((resolve, reject) => {
             db.books.insert(book, function (err, newBook) {
                 if (err) {

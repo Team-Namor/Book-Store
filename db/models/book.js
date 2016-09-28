@@ -1,18 +1,10 @@
-const getId = (function () {
-    let id = 0;
-
-    return function () {
-        id += 1;
-        return id;
-    };
-} ());
-
 export class Book {
-    constructor(title, author, year, ownerId) {
-        this.id = getId();
+    constructor(title, author, year, category, description, ownerId) {
         this.title = title;
         this.author = author;
         this.year = year;
+        this.category = category;
+        this.description = description;
         this.ownerId = ownerId;
     }
 
@@ -38,6 +30,22 @@ export class Book {
 
     set year(value) {
         this._author = year;
+    }
+
+    get category() {
+        return this._category;
+    }
+
+    set category(value) {
+        this._category = value;
+    }
+
+    get description() {
+        return this._description;
+    }
+
+    set description(value) {
+        this._description = value;
     }
 
     get ownerId() {
