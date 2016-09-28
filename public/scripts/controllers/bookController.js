@@ -7,8 +7,8 @@ class BookController {
     index(element) {
         Promise.all([requester.get('/books'), template.get('book')])
             .then(([book, template]) => {
-                let obj = { book: [] };
-                book.forEach(b => obj.book.push(b));
+                let obj = { book: book };
+                console.log(obj);
                 let html = template(obj);
                 element.html(html);
             });

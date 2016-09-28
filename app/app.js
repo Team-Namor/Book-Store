@@ -32,11 +32,11 @@ function authenticate(req, res, next) {
 
 app.get('/books', bookController.get);
 
-app.post('/books', bookController.post);
+app.post('/books', bookController.add);
 
 app.get('/categories', categoryController.get);
 
-app.post('/categories', categoryController.post);
+app.post('/categories', categoryController.add);
 
 app.post('/register', function(req, res) {
     userController.add(req, res);

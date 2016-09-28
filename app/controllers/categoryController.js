@@ -7,7 +7,7 @@ let categoryController = {
         });
     },
 
-    post(req, res) {
+    add(req, res) {
         let category = req.body;
         data.postCategory(category).then(data => res.json(data)).catch(err => {
             res.status(500).send(err.message);
