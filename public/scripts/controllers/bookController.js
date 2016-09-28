@@ -4,17 +4,38 @@ import 'jquery';
 
 class BookController {
     constructor() { }
-    index(element) {
-        Promise.all([requester.get('/books'), template.get('book')])
-            .then(([book, template]) => {
-                let obj = { book: book };
-                console.log(obj);
-                let html = template(obj);
-                element.html(html);
-            });
+    index() {
+        let books;
+        return new Promise((resolve, reject) => {
+            requester.get('/books')
+                .then(data => {
+                    books = data;
+                    return template.get('book');
+                }).then((template) => {
+                    let obj = { book: books };
+                    let html = template(obj);
+                    resolve(html);
+                });
+        });
     }
 
     get(id) {
+
+    }
+
+    searchBy(param) {
+        let foundBooks;
+        return new Promise((resolve, reject) => {
+            requester.get('/books')
+                .then((data) => {
+                    foundBooks = data.filter(b => b.title.toLowerCase().indexOf(param) > -1 || b.author.toLowerCase().indexOf(param) > -1);
+                    return template.get('book');
+                }).then((templ) => {
+                    let searchedBooksObject = { book: foundBooks };
+                    let html = templ(searchedBooksObject);
+                    resolve(html);
+                });
+        });
     }
 
     add(bookData) {

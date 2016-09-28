@@ -1,4 +1,4 @@
-import 'jquery'
+import 'jquery';
 import Sammy from 'sammy';
 import template from 'template';
 import requester from 'requester';
@@ -33,7 +33,27 @@ app.get('#/', function (con) {
 
 app.get('#books', con => {
     let element = con.$element();
-   BC.index(element);
+    BC.index()
+        .then(html => {
+            element.html(html);
+        });
+
+    $('#main-wrapper').on('click', $('#search-btn'), function () {
+        let searchedQuery = $('#search-value').val();
+        if (searchedQuery !== '') {
+            con.redirect(`#search/${searchedQuery}`);
+        }
+
+    });
+});
+
+app.get('#search/?:query', con => {
+    let slashIndex = app.last_location[1].lastIndexOf('/');
+    let query = app.last_location[1].substring(slashIndex + 1);
+
+    BC.searchBy(query).then((html) => {
+        con.$element().html(html);
+    });
 });
 
 app.get('#categories', con => {

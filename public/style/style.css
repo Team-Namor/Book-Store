@@ -29,12 +29,45 @@ html {
     padding: 0;
 }
 
-.book{
+.book {
     text-align: left;
     padding-top: 30px;
     color: white;
 }
 
-.head-page{
+#header-books {
     color: white;
+    text-align: center;
+}
+
+.book-cover {
+    height: 200px;
+}
+
+.search {
+    padding: 5px 0;
+    width: 230px;
+    height: 30px;
+    position: relative;
+    left: 10px;
+    line-height: 22px;
+}
+
+.search input {
+    position: absolute;
+    width: 0px;
+    margin-left: 210px;
+    height: 30px;
+    line-height: 18px;
+    padding: 0 2px 0 2px;
+    border-radius: 1px;
+    width: 200px;
+    margin-left: 0px;
+}
+
+#search-btn {
+    height: 30px;
+    position: relative;
+    left: 200px;
+    border-radius: 1px;
 }
