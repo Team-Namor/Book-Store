@@ -48,7 +48,7 @@ let data = {
                 if (err) {
                     reject(err);
                 } else {
-                    resolve(book);
+                    resolve(category);
                 }
             });
         });
