@@ -15,7 +15,7 @@ import template from 'template';
     login(userData) {
        requester.post('/login', userData)
            .then(data => console.log(data))
-           .catch(err => console.log(err))
+           .catch(err => console.log(err.message))
     }
 
     edit() {

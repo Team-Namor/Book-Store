@@ -1,5 +1,6 @@
 let data = require('../../db/data.js');
 let User = require('../../db/models/user');
+let validator = require('validate-obj');
 
 let usersController = {
     get(req, res) {
@@ -7,20 +8,46 @@ let usersController = {
     },
     
     add(req, res) {
-        let userData = req.body,
-            userType = 'user',
-            firstName = userData['firstname'],
-            lastName = userData['lastname'],
-            email = userData['email'],
-            password = userData['password'];
+        let userData = req.body;
 
-        let user = new User(userType, firstName, lastName, email, password);
+        let validationExpression = {
+            firstname: [validator.required, validator.isString],
+            lastname: [validator.required, validator.isString],
+            email: [validator.required, validator.isEmail],
+            password: [validator.isString, validator.required],
+            confirm: [validator.isString, validator.required],
+            selfCrossValidators : [function(obj) {
+                if (obj.password !== obj.confirm){
+                    return 'passwords do not match';
+                }
 
-        data.addUser(user)
-            .then(data => res.json(data))
-            .catch(err => {
-                res.send(err);
-            });
+                return undefined;
+            }]
+        };
+
+        let validationErrors = validator.hasErrors(userData, validationExpression, 'user');
+
+        if(!validationErrors) {
+            try{
+                let userType = 'user',
+                    firstName = userData['firstname'],
+                    lastName = userData['lastname'],
+                    email = userData['email'],
+                    password = userData['password'];
+
+                let user = new User(userType, firstName, lastName, email, password);
+
+                data.addUser(user)
+                    .then(data => res.json(data))
+                    .catch(err => { res.send(err); });
+
+            } catch (err) {
+                res.status(400).send(err.message)
+            }
+        } else{
+            res.status(400).send({errors: validationErrors})
+        }
+
     },
 
     login(req, res) {
@@ -33,11 +60,11 @@ let usersController = {
             let user = value;
 
             if(user) {
-                res.cookie('cookieName', user._id, { maxAge: 900000, httpOnly: true });
+                res.cookie('loggedUser', user._id, { maxAge: 900000, httpOnly: true });
                 res.send();
             }
             else{
-                res.send();
+                res.status(500).send({ error: 'Login failed!' });
             }
         });
     }

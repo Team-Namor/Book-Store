@@ -20,7 +20,7 @@ let data = {
             });
         });
     },
-      getBookById(req) {
+    getBookById(req) {
         return new Promise((resolve, reject) => {
             db.books.find({_id: req.params.id }, (err, book) => {
                 if (err) {
