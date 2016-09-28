@@ -1,7 +1,6 @@
 import 'jquery';
 import Sammy from 'sammy';
 import template from 'template';
-import loadEvents from './utils/load-events.js';
 
 /* Controllers */
 import UserController from 'scripts/controllers/userController.js';
@@ -12,6 +11,7 @@ import CategoryController from 'scripts/controllers/categoryController.js';
 let UC = new UserController();
 let BC = new BookController();
 let CC = new CategoryController();
+let dynamicContainer = $('#dynamic-container');
 
 let nav = $('ul.nav');
 
@@ -22,21 +22,35 @@ nav.on('click', 'a', ev => {
     element.addClass('active');
 });
 
+/* books events */
+dynamicContainer.on('click', '#search-btn', function () {
+    let searchedQuery = $('#search-value').val();
+    if (searchedQuery !== '') {
+        window.location.href = (`#search/${searchedQuery}`);
+    }
+});
+
+dynamicContainer.on('click', '.book-cover', function (ev) {
+    let element = $(ev.target);
+    console.log(element);
+    let parent = element.parent();
+    let bookId = $(parent).attr('id');
+    window.location.href = (`#books/${bookId}`);
+});
+
 let app = new Sammy('#sammy-app');
 
 app.get('#/', function (con) {
     template.get('link').then(temp => {
         let html = temp({ name: 'MAIN' });
-        con.$element().html(html);
+       dynamicContainer.html(html);
     });
 });
 
 app.get('#books', con => {
-    let element = con.$element();
     BC.index()
         .then(html => {
-            con.$element().html(html);
-            loadEvents(con);
+            dynamicContainer.html(html);
         });
 });
 
@@ -45,8 +59,7 @@ app.get('#books/:id', con => {
     let bookId = app.last_location[1].substring(slashIndex + 1);
     BC.get(bookId)
         .then((html) => {
-            con.$element().html(html); //change html template
-            loadEvents(con);
+           dynamicContainer.html(html);
             con.redirect(`#books/${bookId}`);
         });
 });
@@ -56,8 +69,7 @@ app.get('#search/?:query', con => {
     let query = app.last_location[1].substring(slashIndex + 1);
 
     BC.searchBy(query).then((html) => {
-        con.$element().html(html);
-        loadEvents(con);
+        dynamicContainer.html(html);
     });
 });
 
@@ -65,26 +77,26 @@ app.get('#categories', con => {
     template.get('category').then(temp => {
         let html = temp({ name: 'Categories' })
 
-        con.$element().html(html);
+         dynamicContainer.html(html);
     });
-    let element = con.$element();
-    CC.index(element);
+    
+    CC.index(dynamicContainer);
 });
 
 app.get('#link3', con => {
     template.get('link').then(temp => {
-        let html = temp({ name: 'LINK3' })
+        let html = temp({ name: 'LINK3' });
 
-        con.$element().html(html);
+       dynamicContainer.html(html);
     });
 });
 
 /* Register user */
 app.get('#Register', con => {
     template.get('register').then(temp => {
-        let html = temp({ name: 'REGISTER' })
+        let html = temp({ name: 'REGISTER' });
 
-        con.$element().html(html);
+       dynamicContainer.html(html);
     });
 });
 
@@ -95,9 +107,9 @@ app.post('#Register', con => {
 /* Login user */
 app.get('#Login', con => {
     template.get('login').then(temp => {
-        let html = temp({ name: 'LOGIN' })
+        let html = temp({ name: 'LOGIN' });
 
-        con.$element().html(html);
+       dynamicContainer.html(html);
     });
 });
 
@@ -110,4 +122,4 @@ app.get('#Admin', con => {
     UC.login(con.params);
 });
 
-app.run('#/')
+app.run('#/');
