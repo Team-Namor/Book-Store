@@ -1,16 +1,16 @@
 import 'jquery';
 import Sammy from 'sammy';
 import template from 'template';
-import requester from 'requester';
 
 /* Controllers */
 import UserController from 'scripts/controllers/userController.js';
 import BookController from 'scripts/controllers/bookController.js';
-
+import CategoryController from 'scripts/controllers/categoryController.js';
 
 /* Create controller instance */
 let UC = new UserController();
 let BC = new BookController();
+let CC = new CategoryController();
 
 let nav = $('ul.nav');
 
@@ -57,11 +57,11 @@ app.get('#search/?:query', con => {
 });
 
 app.get('#categories', con => {
-    Promise.all([requester.get('/categories'), template.get('category')])
-        .then(([data, template]) => {
-            let html = template(data);
-            con.$element().html(html);
-        });
+    template.get('category').then(temp => {
+        let html = temp({name: 'Categories'})
+
+        con.$element().html(html);
+    });
 });
 
 app.get('#link3', con => {

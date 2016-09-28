@@ -16,4 +16,8 @@ class Category {
     }
 }
 
-module.exports = Category;
+function getNewCategory(name) {
+    return new Category(name);
+}
+
+module.exports = getNewCategory;
