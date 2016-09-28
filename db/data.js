@@ -1,4 +1,5 @@
 var Datastore = require('nedb');
+var getNewCategory=require('./models/category.js');
 
 var db = {};
 
@@ -90,4 +91,19 @@ let data = {
         });
     }
 };
+
+let categorySciFi = getNewCategory('Science Fiction');
+let categoryHorror = getNewCategory('Horror');
+let categoryDrama = getNewCategory('Drama');
+let categoryRomance = getNewCategory('Romance');
+let categoryThriller = getNewCategory('Thriller');
+let categoryComedy = getNewCategory('Comedy')
+
+data.postCategory(categorySciFi);
+data.postCategory(categoryHorror);
+data.postCategory(categoryDrama);
+data.postCategory(categoryRomance);
+data.postCategory(categoryThriller);
+data.postCategory(categoryComedy)
+
 module.exports = data;

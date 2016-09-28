@@ -57,11 +57,8 @@ app.get('#search/?:query', con => {
 });
 
 app.get('#categories', con => {
-    template.get('category').then(temp => {
-        let html = temp({name: 'Categories'})
-
-        con.$element().html(html);
-    });
+    let element = con.$element();
+    CC.index(element);
 });
 
 app.get('#link3', con => {

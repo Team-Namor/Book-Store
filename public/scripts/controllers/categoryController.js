@@ -1,4 +1,3 @@
-
 import requester from '../utils/jqueryJSONRequester.js';
 import template from 'template';
 import 'jquery';
