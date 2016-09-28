@@ -67,6 +67,8 @@ app.get('#categories', con => {
 
         con.$element().html(html);
     });
+    let element = con.$element();
+    CC.index(element);
 });
 
 app.get('#link3', con => {
