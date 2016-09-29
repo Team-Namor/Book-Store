@@ -1,6 +1,6 @@
 let cookies = {
     get(name) {
-        let allCookiesArray = document.cookie.split(';').map(s => {
+        let allCookiesArray = document.cookie.split(/;\s*/).map(s => {
             return s.split('=');
         })
          let allCookiesObject = {};

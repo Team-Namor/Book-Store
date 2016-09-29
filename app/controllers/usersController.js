@@ -60,7 +60,7 @@ let usersController = {
             let user = value;
 
             if(user) {
-                res.cookie('loggedUser', user._id, { maxAge: 900000, httpOnly: true });
+                res.cookie('user', user._id);
                 res.send();
             }
             else{
