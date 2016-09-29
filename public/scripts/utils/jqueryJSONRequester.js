@@ -22,7 +22,8 @@ let requester = {
                 data: JSON.stringify(data)
             })
             .done(resolve)
-            .fail(reject)
+            .fail(err => {
+                reject(err)})
         });
     }
 }

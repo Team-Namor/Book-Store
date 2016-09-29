@@ -1,5 +1,6 @@
 import requester from '../utils/jqueryJSONRequester.js' ;
 import template from 'template';
+import popUp from '../utils/pop-up.js'
 
  class UserController {
     constructor(){
@@ -9,13 +10,15 @@ import template from 'template';
     add(userData) {
         requester.post('/register', userData)
             .then(data => console.log(data))
-            .catch(err => console.log(err))
+            .catch(err => popUp.alert(err.responseText))
     }
 
     login(userData) {
        requester.post('/login', userData)
-           .then(data => console.log(data))
-           .catch(err => console.log(err.message))
+           .then(data => {console.log('then')})
+           .catch(err => {
+               popUp.alert(err.responseText)})
+
     }
 
     edit() {
