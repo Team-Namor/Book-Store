@@ -68,7 +68,7 @@ let usersController = {
             let user = value;
 
             if(user) {
-                res.cookie('user', user._id);
+                res.cookie('reuser', user._id);
                 res.send();
             }
             else{

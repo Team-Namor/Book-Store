@@ -57,12 +57,14 @@ dynamicContainer.on('click', '#like-btn', function (ev) {
 
 let app = new Sammy('#sammy-app');
 
-app.before({except: {path: ['#/', '#Login', '#Register']}}, callback => {
+app.before({except: {path: ['#/', '#Login', '#Register']}}, context => {
     if(!cookies.get('user')){
-        popup.alert('user not loged in !!!');
-        callback.redirect('#Login');
+        popup.alert('user not loged in !!!')
+        context.redirect('#Login');
         return false;
     } 
+
+    context.isLogedin = true;
 })
 
 app.get('#/', function (con) {
@@ -143,7 +145,6 @@ app.post('#Login', con => {
 
 app.get('#Admin', con => {
     UC.login(con.params);
-
 });
 
 app.run('#/');
