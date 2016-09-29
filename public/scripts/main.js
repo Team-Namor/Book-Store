@@ -26,13 +26,12 @@ nav.on('click', 'a', ev => {
 dynamicContainer.on('click', '#search-btn', function () {
     let searchedQuery = $('#search-value').val();
     if (searchedQuery !== '') {
-        window.location.href = (`#search/${searchedQuery}`);
+        window.location.href = (`#search/${searchedQuery}&${1}`);
     }
 });
 
 dynamicContainer.on('click', '.book-cover', function (ev) {
     let element = $(ev.target);
-    console.log(element);
     let parent = element.parent();
     let bookId = $(parent).attr('id');
     window.location.href = (`#books/${bookId}`);
@@ -43,43 +42,43 @@ let app = new Sammy('#sammy-app');
 app.get('#/', function (con) {
     template.get('link').then(temp => {
         let html = temp({ name: 'MAIN' });
-       dynamicContainer.html(html);
+        dynamicContainer.html(html);
     });
 });
 
-app.get('#books', con => {
-    BC.index()
+app.get('#books/page/?:page', con => {
+    let page = +con.params.page;
+    BC.index(page)
         .then(html => {
             dynamicContainer.html(html);
         });
 });
 
 app.get('#books/:id', con => {
-    let slashIndex = app.last_location[1].lastIndexOf('/');
-    let bookId = app.last_location[1].substring(slashIndex + 1);
+    let bookId = con.params.id;
     BC.get(bookId)
         .then((html) => {
-           dynamicContainer.html(html);
-            con.redirect(`#books/${bookId}`);
+            dynamicContainer.html(html);
+           // con.redirect(`#books/${bookId}`);
         });
 });
 
-app.get('#search/?:query', con => {
-    let slashIndex = app.last_location[1].lastIndexOf('/');
-    let query = app.last_location[1].substring(slashIndex + 1);
-
-    BC.searchBy(query).then((html) => {
+app.get('#search/?:query&:page', con => {
+    let query = con.params.query;
+    let page = +con.params.page;
+    BC.searchBy(query, page).then((html) => {
         dynamicContainer.html(html);
     });
 });
+
 
 app.get('#categories', con => {
     template.get('category').then(temp => {
         let html = temp({ name: 'Categories' })
 
-         dynamicContainer.html(html);
+        dynamicContainer.html(html);
     });
-    
+
     CC.index(dynamicContainer);
 });
 
@@ -87,7 +86,7 @@ app.get('#link3', con => {
     template.get('link').then(temp => {
         let html = temp({ name: 'LINK3' });
 
-       dynamicContainer.html(html);
+        dynamicContainer.html(html);
     });
 });
 
@@ -96,7 +95,7 @@ app.get('#Register', con => {
     template.get('register').then(temp => {
         let html = temp({ name: 'REGISTER' });
 
-       dynamicContainer.html(html);
+        dynamicContainer.html(html);
     });
 });
 
@@ -109,7 +108,7 @@ app.get('#Login', con => {
     template.get('login').then(temp => {
         let html = temp({ name: 'LOGIN' });
 
-       dynamicContainer.html(html);
+        dynamicContainer.html(html);
     });
 });
 

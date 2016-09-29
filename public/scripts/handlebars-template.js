@@ -1,6 +1,11 @@
 import handlebars from 'handlebars';
 import 'jquery';
 
+handlebars.registerHelper("inc", function(value, options)
+{
+    return parseInt(value) + 1;
+});
+
 export  default {
     get(name){
         return new Promise((resolve, reject) => {
@@ -11,7 +16,7 @@ export  default {
 
                     resolve(template);
                 }
-            })
-        })
+            });
+        });
     }
-}
+};
