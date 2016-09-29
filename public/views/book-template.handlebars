@@ -13,11 +13,11 @@
     <div class="row">
     {{#each books.book}}
         <div class="book col-xs-6 col-sm-4 col-md-4 col-lg-2" id="{{_id}}">
-            <img class="book-cover" src="{{imgURL}}" alt="bookCover">
+            <img class="book-cover" src="{{_imgURL}}" alt="bookCover">
             <ul class='book-info'>
-                <li> <b>Title: </b><span>{{title}}</span> </li>
-                <li> <b>Author: </b><span>{{author}}</span></li>
-                <li> <b>Year: </b><span>{{year}}</span></li>
+                <li> <b>Title: </b><span>{{_title}}</span> </li>
+                <li> <b>Author: </b><span>{{_author}}</span></li>
+                <li> <b>Year: </b><span>{{_year}}</span></li>
             </ul>
         </div>
     {{/each}}

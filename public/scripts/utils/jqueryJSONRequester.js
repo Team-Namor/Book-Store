@@ -25,7 +25,19 @@ let requester = {
             .fail(err => {
                 reject(err)})
         });
+    },
+      put(url, data) {
+        return new Promise((resolve, reject) => {
+            $.ajax({
+                url,
+                contentType: 'application/json',
+                method: 'PUT',
+                data: JSON.stringify(data)
+            })
+                .done(resolve)
+                .fail(reject);
+        });
     }
-}
+};
 
 export default requester;

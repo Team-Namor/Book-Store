@@ -39,6 +39,22 @@ dynamicContainer.on('click', '.book-cover', function (ev) {
     window.location.href = (`#books/${bookId}`);
 });
 
+dynamicContainer.on('click', '#like-btn', function (ev) {
+    let element = $(event.target),
+        currentLikes = ()=>element.find('i').text(),
+        link = window.location.hash,
+        slash = link.indexOf('/'),
+        bookId = link.substring(slash + 1);
+
+    BC.edit().increaseLikes(bookId, +(currentLikes())+1)
+      .then(success => {
+        if(success===1){
+          return element.find('i').text(+(currentLikes())+1);
+        }
+        console.log('DB update fail');
+      });
+});
+
 let app = new Sammy('#sammy-app');
 
 app.before({except: {path: ['#/', '#Login', '#Register']}}, callback => {
@@ -69,7 +85,6 @@ app.get('#books/:id', con => {
     BC.get(bookId)
         .then((html) => {
             dynamicContainer.html(html);
-            // con.redirect(`#books/${bookId}`);
         });
 });
 
@@ -80,7 +95,6 @@ app.get('#search/?:query&:page', con => {
         dynamicContainer.html(html);
     });
 });
-
 
 app.get('#categories', con => {
     template.get('category').then(temp => {
