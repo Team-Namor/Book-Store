@@ -3,30 +3,57 @@
 
 <head>
     <meta charset="UTF-8">
+
     <link href="bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+    <link href="bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="bower_components/owl.carousel/dist/assets/owl.carousel.min.css" rel="stylesheet">
     <link href="style/style.css" rel="stylesheet">
+
     <title>Book Store </title>
 </head>
 
 <body class="bg-transperant">
     <div id="main-wrapper" class="container">
         <header class="container ">
-            <h1 class="display-1">BOOK STORE</h1>
-
-        </header>
-        <nav class="container navbar">
-            <div class="row">
-                <ul class="nav nav-pills pull-xs-left">
-                    <li class="nav-item "><a href="#books/page/1" class="background-transparent nav-link">Books</a></li>
-                    <li class="nav-item"><a href="#categories" class="background-transparent nav-link">Categories</a></li>
-                    <li class="nav-item"><a href="#link3" class="background-transparent nav-link">LINK3</a></li>
+            <div class="menu-user">
+                <ul id="menu-user" class="col-xs-12 col-sm-12 col-md-8 col-lg-6 pull-xs-right">
+                    <li class="col-xs-4 pull-xs-left menu-user-cart">
+                        <a class="btn btn-info" href="#Cart">
+                            <i class="fa fa-shopping-cart"></i>
+                            Cart
+                            <span class="total">$0.00</span>
+                        </a>
+                    </li>
+                    <li class="col-xs-3 pull-xs-right menu-user-login">
+                        <a class="btn btn-info" href="#Login">Login</a>
+                    </li>
+                    <li class="col-xs-3 pull-xs-right menu-user-register">
+                        <a class="btn btn-danger" href="#Register">Register</a>
+                    </li>
                 </ul>
-                <div class=" pull-xs-right">
-                    <a class="btn btn-info" href="#Login">Login</a>
-                    <a class="btn btn-danger" href="#Register">Register</a>
-                </div>
             </div>
-        </nav>
+            <div class="menu-main-wrap">
+                <div class="logo col-xs-3">
+                    <h1 class="display-1">
+                        <a href="/#/">
+                            <img src="style/images/logo_light.png" alt="logo"/>
+                        </a>
+                    </h1>
+                </div>
+                <nav class="container navbar col-xs-9">
+                    <div class="row">
+                        <ul id="main-nav" class="nav nav-pills pull-right">
+                            <li class="nav-item"><a href="#/" class="background-transparent nav-link">Home</a></li>
+                            <li class="nav-item "><a href="#books/page/1" class="background-transparent nav-link">Books</a></li>
+                            <li class="nav-item"><a href="#categories" class="background-transparent nav-link">Categories</a></li>
+                            <li class="nav-item"><a href="#promotion" class="background-transparent nav-link">Promotion</a></li>
+                            <li class="nav-item"><a href="#contacts" class="background-transparent nav-link">Contacts us</a></li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </header>
+
         <div class="background-transparent container" id="sammy-app">
             <div id="dynamic-container">
 

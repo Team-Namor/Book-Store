@@ -40,7 +40,7 @@ dynamicContainer.on('click', '.book-cover', function (ev) {
 let app = new Sammy('#sammy-app');
 
 app.get('#/', function (con) {
-    template.get('link').then(temp => {
+    template.get('home').then(temp => {
         let html = temp({ name: 'MAIN' });
         dynamicContainer.html(html);
     });
@@ -113,7 +113,10 @@ app.get('#Login', con => {
 });
 
 app.post('#Login', con => {
-    UC.login(con.params);
+    UC.login(con.params)
+        .then(err => {
+        console.dir(err);
+    });
 });
 
 
