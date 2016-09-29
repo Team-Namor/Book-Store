@@ -18,9 +18,9 @@ class User {
     }
 
     set userType(value) {
-        if(!validator.equals(value, 'admin') || !validator.equals(value, 'user')) {
+       /* if(!validator.equals(value, 'admin') || !validator.equals(value, 'user')) {
             throw new Error('User type must be admin or user.');
-        }
+        }*/
 
         this._userType = value;
     }
