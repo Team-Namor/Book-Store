@@ -59,7 +59,7 @@ app.get('#books/:id', con => {
     BC.get(bookId)
         .then((html) => {
             dynamicContainer.html(html);
-           // con.redirect(`#books/${bookId}`);
+            // con.redirect(`#books/${bookId}`);
         });
 });
 

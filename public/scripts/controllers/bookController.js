@@ -16,8 +16,8 @@ class BookController {
                     return template.get('book');
                 }).then((template) => {
                     let pageSize = Math.floor(Math.abs((book.length - SIZE - 1)) / SIZE);
-                    let currentPage = book.slice((page - 1) * SIZE, page * SIZE);
-                    let buttonsCount = Array(SIZE - 1).fill(1);
+                    let currentPage = book.slice((page - 1) * SIZE, (page - 1) * SIZE + SIZE);
+                    let buttonsCount = Array(Math.ceil(book.length / SIZE)).fill(1);
                     let obj = { books: { book: currentPage, size: buttonsCount, hasQuery: false } };
                     let html = template(obj);
                     resolve(html);
@@ -31,7 +31,7 @@ class BookController {
             requester.get('/books/' + id)
                 .then(data => {
                     book = data;
-                    return template.get('book');
+                    return template.get('single-book');
                 }).then((template) => {
                     let obj = { book: book };
                     let html = template(obj);
@@ -51,7 +51,7 @@ class BookController {
                     return template.get('book');
                 }).then((templ) => {
                     let pageSize = Math.floor(Math.abs((book.length - SIZE - 1)) / SIZE);
-                    let currentPage = book.slice((page - 1) * SIZE, page * SIZE);
+                    let currentPage = book.slice((page - 1) * SIZE, (page - 1) * SIZE + SIZE);
                     let buttonsCount = Array(Math.ceil(book.length / SIZE)).fill(param);
                     let searchedBooksObject = { books: { book: currentPage, size: buttonsCount, hasQuery: true } };
                     let html = templ(searchedBooksObject);

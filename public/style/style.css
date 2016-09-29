@@ -24,6 +24,9 @@ html {
     padding-bottom: 0;
 }
 
+
+/* css all books page*/
+
 .book-info {
     list-style: none;
     padding: 0;
@@ -42,32 +45,34 @@ html {
 
 .book-cover {
     height: 200px;
+    width: 	130px;
 }
 
-.search {
-    padding: 5px 0;
-    width: 230px;
-    height: 30px;
-    position: relative;
-    left: 10px;
-    line-height: 22px;
+
+/* css for search input and button */
+.add-on .input-group-btn > .btn {
+  border: none;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
 }
 
-.search input {
-    position: absolute;
-    width: 0px;
-    margin-left: 210px;
-    height: 30px;
-    line-height: 18px;
-    padding: 0 2px 0 2px;
-    border-radius: 1px;
-    width: 200px;
-    margin-left: 0px;
+/* css for single book page */
+#single-book-page {
+    padding: 20px;
 }
 
-#search-btn {
-    height: 30px;
-    position: relative;
-    left: 200px;
-    border-radius: 1px;
+#single-book-cover img {
+    width: 400px;
+    height: 600px;
+    
+}
+
+#single-book-info {
+    color: white;
+    width: 300px;
+}
+
+#single-book-info span {
+    display: block;
+    text-align: justify;
 }

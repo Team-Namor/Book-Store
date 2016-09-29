@@ -1,10 +1,18 @@
-    <h2 id="header-books">Books in our store</h2>
-    <div class="search">
-        <input type="text" id="search-value" class="form-control input-sm" maxlength="64" placeholder="Search books" />
-        <button type="submit" id="search-btn" class="btn btn-primary btn-sm">Search</button>
+<div class="container">
+    <div class="row">
+        <h2 id="header-books">Books in our store</h2>
+        <div class="col-md-4">
+           <div class="input-group add-on">
+               <input class="form-control" id="search-value" placeholder="Search books" type="text">
+               <div class="input-group-btn">
+                   <button class="btn btn-success" id="search-btn" type="submit">Search</button>
+               </div>
+           </div>
+        </div>
     </div>
+    <div class="row">
     {{#each books.book}}
-        <div class="book col-md-2" id="{{_id}}">
+        <div class="book col-xs-6 col-sm-4 col-md-4 col-lg-2" id="{{_id}}">
             <img class="book-cover" src="{{imgURL}}" alt="bookCover">
             <ul class='book-info'>
                 <li> <b>Title: </b><span>{{title}}</span> </li>
@@ -13,6 +21,7 @@
             </ul>
         </div>
     {{/each}}
+    </div>
     <div class="row">
         <ul class="pagination">
             <!--<li class="page-item">
@@ -38,3 +47,4 @@
             </li>-->
         </ul>
     </div>
+</div>
