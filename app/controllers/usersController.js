@@ -64,7 +64,7 @@ let usersController = {
                 res.send();
             }
             else{
-                res.status(400).send({ error: 'Login failed! Please enter valid credentials!' });
+                res.status(400).send({ error: 'Login failed!' });
             }
         });
     }

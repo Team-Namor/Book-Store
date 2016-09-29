@@ -1,6 +1,8 @@
 import 'jquery';
 import Sammy from 'sammy';
 import template from 'template';
+import cookies from 'scripts/utils/cookies.js';
+import popup from 'scripts/utils/pop-up.js';
 
 /* Controllers */
 import UserController from 'scripts/controllers/userController.js';
@@ -37,7 +39,31 @@ dynamicContainer.on('click', '.book-cover', function (ev) {
     window.location.href = (`#books/${bookId}`);
 });
 
+dynamicContainer.on('click', '#like-btn', function (ev) {
+    let element = $(event.target),
+        currentLikes = ()=>element.find('i').text(),
+        link = window.location.hash,
+        slash = link.indexOf('/'),
+        bookId = link.substring(slash + 1);
+
+    BC.edit().increaseLikes(bookId, +(currentLikes())+1)
+      .then(success => {
+        if(success===1){
+          return element.find('i').text(+(currentLikes())+1);
+        }
+        console.log('DB update fail');
+      });
+});
+
 let app = new Sammy('#sammy-app');
+
+app.before({except: {path: ['#/', '#Login', '#Register']}}, callback => {
+    if(!cookies.get('user')){
+        popup.alert('user not loged in !!!')
+        callback.redirect('#Login');
+        return false;
+    } 
+})
 
 app.get('#/', function (con) {
     template.get('home').then(temp => {
@@ -59,7 +85,6 @@ app.get('#books/:id', con => {
     BC.get(bookId)
         .then((html) => {
             dynamicContainer.html(html);
-            // con.redirect(`#books/${bookId}`);
         });
 });
 
@@ -70,7 +95,6 @@ app.get('#search/?:query&:page', con => {
         dynamicContainer.html(html);
     });
 });
-
 
 app.get('#categories', con => {
     template.get('category').then(temp => {

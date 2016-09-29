@@ -46,8 +46,8 @@ class BookController {
             requester.get('/books')
                 .then((data) => {
                     let paramToLower = param.toLowerCase();
-                    book = data.filter(b => b.title.toLowerCase().indexOf(paramToLower) > -1 ||
-                        b.author.toLowerCase().indexOf(paramToLower) > -1);
+                    book = data.filter(b => b._title.toLowerCase().indexOf(paramToLower) > -1 ||
+                        b._author.toLowerCase().indexOf(paramToLower) > -1);
                     return template.get('book');
                 }).then((templ) => {
                     let pageSize = Math.floor(Math.abs((book.length - SIZE - 1)) / SIZE);
@@ -65,7 +65,13 @@ class BookController {
     }
 
     edit() {
+        function increaseLikes(bookId, newLikes) {
+          return requester.put(`/books/${bookId}`, {likes:newLikes})
+        }
 
+        return {
+            increaseLikes
+        };
     }
 
     delete() {
