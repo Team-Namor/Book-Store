@@ -59,7 +59,7 @@ let app = new Sammy('#sammy-app');
 
 app.before({except: {path: ['#/', '#Login', '#Register']}}, callback => {
     if(!cookies.get('user')){
-        popup.alert('user not loged in !!!')
+        popup.alert('user not loged in !!!');
         callback.redirect('#Login');
         return false;
     } 
@@ -124,7 +124,7 @@ app.get('#Register', con => {
 });
 
 app.post('#Register', con => {
-    UC.add(con.params);
+    UC.add(con);
 });
 
 /* Login user */
@@ -137,15 +137,13 @@ app.get('#Login', con => {
 });
 
 app.post('#Login', con => {
-    UC.login(con.params)
-        .then(err => {
-        console.dir(err);
-    });
+    UC.login(con);
 });
 
 
 app.get('#Admin', con => {
     UC.login(con.params);
+
 });
 
 app.run('#/');

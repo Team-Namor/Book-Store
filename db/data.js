@@ -80,11 +80,23 @@ let data = {
 
     getUserById(userId) {
         return new Promise ((resolve, reject) => {
-            db.users.find({_id: userId}, (err, books) => {
+            db.users.find({_id: userId}, (err, user) => {
                 if (err) {
                     reject(err);
                 } else {
-                    resolve(books);
+                    resolve(user);
+                }
+            });
+        });
+    },
+
+    getUserByUsername(username) {
+        return new Promise ((resolve, reject) => {
+            db.users.find({_email: username}, (err, user) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(user);
                 }
             });
         });

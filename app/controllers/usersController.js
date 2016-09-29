@@ -38,7 +38,15 @@ let usersController = {
                 let user = new User(userType, firstName, lastName, email, password);
 
                 data.addUser(user)
-                    .then(data => res.json(data))
+                    .then(login => {
+                        let foundUserPromise = data.checkUserExisting(email, password);
+                        
+                        foundUserPromise.then(function(foundUser) {
+                            res.cookie('user', foundUser._id);
+                            res.send();
+                        });
+
+                    })
                     .catch(err => { res.send(err); });
 
             } catch (err) {

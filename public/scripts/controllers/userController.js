@@ -7,18 +7,26 @@ import popUp from '../utils/pop-up.js'
 
     }
 
-    add(userData) {
-        requester.post('/register', userData)
-            .then(data => console.log(data))
+    add(userContext) {
+        requester.post('/register', userContext.params)
+            .then(success => popUp.info('Successfully registered!'))
+            .then(
+                setTimeout(function(){
+                    userContext.redirect('#books/page/1')
+                }, 1000)
+            )
             .catch(err => popUp.alert(err.responseText))
     }
 
-    login(userData) {
-       requester.post('/login', userData)
-           .then(data => {console.log('then')})
-           .catch(err => {
-               popUp.alert(err.responseText)})
-
+    login(userContext) {
+       requester.post('/login', userContext.params)
+           .then(success => popUp.info('Successfully logged in!'))
+           .then(
+               setTimeout(function(){
+                   userContext.redirect('#books/page/1')
+               }, 1000)
+           )
+           .catch(err => popUp.alert(err.responseText))
     }
 
     edit() {
