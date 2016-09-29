@@ -1,11 +1,13 @@
-export class Book {
-    constructor(title, author, year, category, description, ownerId) {
+class Book {
+    constructor(title, author, year, category, description, imgURL, ownerId) {
         this.title = title;
         this.author = author;
         this.year = year;
         this.category = category;
         this.description = description;
+        this.imgURL = imgURL;
         this.ownerId = ownerId;
+        this.likes = 0;
     }
 
     get title() {
@@ -13,6 +15,9 @@ export class Book {
     }
 
     set title(value) {
+        if (value.length < 2) {
+            throw "Title must be at least two symbols";
+        }
         this._title = value;
     }
 
@@ -29,7 +34,7 @@ export class Book {
     }
 
     set year(value) {
-        this._author = year;
+        this._year = value;
     }
 
     get category() {
@@ -39,6 +44,15 @@ export class Book {
     set category(value) {
         this._category = value;
     }
+
+    get imgURL() {
+        return this._imgURL;
+    }
+
+    set imgURL(value) {
+        this._imgURL = value;
+    }
+
 
     get description() {
         return this._description;
@@ -55,3 +69,4 @@ export class Book {
         this._ownerId = value;
     }
 }
+module.exports = Book;

@@ -18,6 +18,13 @@ let bookController = {
         data.addBook(book).then(data => res.json(data)).catch(err => {
             res.status(500).send(err.message);
         });
+    },
+    put(req, res) {
+        let update = req.body;
+        let bookToBeUpdated = req.params.id;
+        data.updateBook(update, bookToBeUpdated)
+            .then(data => res.json(data))
+            .catch(err => res.status(500).send(err.message));
     }
 };
 
