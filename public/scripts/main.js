@@ -1,6 +1,8 @@
 import 'jquery';
 import Sammy from 'sammy';
 import template from 'template';
+import cookies from 'scripts/utils/cookies.js';
+import popup from 'scripts/utils/pop-up.js';
 
 /* Controllers */
 import UserController from 'scripts/controllers/userController.js';
@@ -38,6 +40,14 @@ dynamicContainer.on('click', '.book-cover', function (ev) {
 });
 
 let app = new Sammy('#sammy-app');
+
+app.before({except: {path: ['#/', '#Login', '#Register']}}, callback => {
+    if(!cookies.get('user')){
+        popup.alert('user not loged in !!!')
+        callback.redirect('#Login');
+        return false;
+    } 
+})
 
 app.get('#/', function (con) {
     template.get('link').then(temp => {
