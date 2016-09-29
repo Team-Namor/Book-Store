@@ -9,15 +9,14 @@ import popUp from '../utils/pop-up.js'
 
     add(userData) {
         requester.post('/register', userData)
-            .then(data => console.log(data))
+            .then(data => popUp.info(`${userData.firstname} ${userData.lastname} registerd`))
             .catch(err => popUp.alert(err.responseText))
     }
 
     login(userData) {
        requester.post('/login', userData)
-           .then(data => {console.log('then')})
-           .catch(err => {
-               popUp.alert(err.responseText)})
+           .then(data => popUp.info(`${userData.username} logedin`))
+           .catch(err => popUp.alert(err.responseText))
 
     }
 

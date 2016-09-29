@@ -63,6 +63,8 @@ app.before({except: {path: ['#/', '#Login', '#Register']}}, callback => {
         callback.redirect('#Login');
         return false;
     } 
+
+    callback.isLogedin = true;
 })
 
 app.get('#/', function (con) {
