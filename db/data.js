@@ -45,7 +45,6 @@ let data = {
 
     },
     updateBook(update, bookToBeUpdated) {
-        console.log(update, bookToBeUpdated);
         return new Promise((resolve, reject) => {
             db.books.update({ "_id": bookToBeUpdated }, { $set: update }, { returnUpdatedDocs: true }, function (err, result) {
                 if (err) {
