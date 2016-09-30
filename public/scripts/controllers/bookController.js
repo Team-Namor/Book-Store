@@ -30,15 +30,37 @@ class BookController {
         return new Promise((resolve, reject) => {
             requester.get('/books/' + id)
                 .then(data => {
-                    book = data;
-                    return template.get('single-book');
-                }).then((template) => {
-                    let obj = { book: book };
-                    let html = template(obj);
-                    resolve(html);
+                     resolve(data);
                 });
         });
     }
+
+    attachToTemplate(data, templateName) {
+        return new Promise((resolve, reject) => {
+            template.get(templateName).then(template => {
+                let obj = { book: data };
+                let html = template(obj);
+                resolve(html);
+            });
+        });
+    }
+
+
+
+    // get(id) {
+    //     let book;
+    //     return new Promise((resolve, reject) => {
+    //         requester.get('/books/' + id)
+    //             .then(data => {
+    //                 book = data;
+    //                 return template.get('single-book');
+    //             }).then((template) => {
+    //                 let obj = { book: book };
+    //                 let html = template(obj);
+    //                 resolve(html);
+    //             });
+    //     });
+    // }
 
     searchBy(param, page) {
         let book;
@@ -66,7 +88,7 @@ class BookController {
 
     edit() {
         function increaseLikes(bookId, newLikes) {
-          return requester.put(`/books/${bookId}`, {likes:newLikes})
+            return requester.put(`/books/${bookId}`, { likes: newLikes })
         }
 
         return {

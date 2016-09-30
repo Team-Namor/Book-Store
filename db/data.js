@@ -144,9 +144,9 @@ data.postCategory(categoryComedy)
 
 let lorem = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.";
 
-let book2 = new Book("1984", "George Orwell", 1924, "Science Fiction", lorem, "http://6.darkroom.shortlist.com/980/b75d3b311009738de30d065d6d530928:402fef9b2f2bf80737098bfd988c23f2/1984", 123);
-let book4 = new Book("Just another book", "Jack", 1999, "Thriller", lorem, "https://s-media-cache-ak0.pinimg.com/236x/d2/0b/29/d20b291bd20bf99262d4dbdc41ded105.jpg", 4312);
-let book6 = new Book("Ripe", "Julia Moulden", 2012, "Comedy", lorem, "https://upload.wikimedia.org/wikipedia/en/b/b3/Book_Cover_V2.jpeg", 41);
+let book2 = new Book("1984", "George Orwell", 1924, "Science Fiction", lorem, "http://6.darkroom.shortlist.com/980/b75d3b311009738de30d065d6d530928:402fef9b2f2bf80737098bfd988c23f2/1984", 20, 123);
+let book4 = new Book("Just another book", "Jack", 1999, "Thriller", lorem, "https://s-media-cache-ak0.pinimg.com/236x/d2/0b/29/d20b291bd20bf99262d4dbdc41ded105.jpg", 10, 4312);
+let book6 = new Book("Ripe", "Julia Moulden", 2012, "Comedy", lorem, "https://upload.wikimedia.org/wikipedia/en/b/b3/Book_Cover_V2.jpeg", 20, 41);
 
 data.addBook(book2);
 data.addBook(book4);

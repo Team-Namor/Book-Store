@@ -1,5 +1,5 @@
 class Book {
-    constructor(title, author, year, category, description, imgURL, ownerId) {
+    constructor(title, author, year, category, description, imgURL, price, ownerId) {
         this.title = title;
         this.author = author;
         this.year = year;
@@ -7,6 +7,7 @@ class Book {
         this.description = description;
         this.imgURL = imgURL;
         this.ownerId = ownerId;
+        this.price = price;
         this.likes = 0;
     }
 
@@ -67,6 +68,13 @@ class Book {
     }
     set ownerId(value) {
         this._ownerId = value;
+    }
+
+    get price() {
+        return this._price;
+    }
+    set price(value) {
+        this._price = value;
     }
 }
 module.exports = Book;

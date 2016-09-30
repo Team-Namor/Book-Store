@@ -39,30 +39,52 @@ dynamicContainer.on('click', '.book-cover', function (ev) {
     window.location.href = (`#books/${bookId}`);
 });
 
-dynamicContainer.on('click', '#like-btn', function (ev) {
-    let element = $(event.target),
-        currentLikes = ()=>element.find('i').text(),
+dynamicContainer.on('click', '#add-to-cart-btn', function (ev) {
+    let element = $(ev.target),
         link = window.location.hash,
         slash = link.indexOf('/'),
         bookId = link.substring(slash + 1);
 
-    BC.edit().increaseLikes(bookId, +(currentLikes())+1)
-      .then(success => {
-        if(success===1){
-          return element.find('i').text(+(currentLikes())+1);
-        }
-        console.log('DB update fail');
-      });
+    let text = $('#bookPrice').html();
+    let price = text.substring(14, text.length - 1);
+    BC.get(bookId).then(data => {
+        let cartInfo = JSON.parse(sessionStorage.getItem('cart')) || [];
+        cartInfo.push(data[0]);
+        sessionStorage.setItem('cart', JSON.stringify(cartInfo));
+
+        // TODO show msg added to cart
+
+        let currentAmount = +$('.total').html().substring(1),
+            newAMount = (currentAmount + data[0]._price).toFixed(2);
+        $('.total').html(`$${newAMount}`);
+
+    });
+});
+
+dynamicContainer.on('click', '#like-btn', function (ev) {
+    let element = $(event.target),
+        currentLikes = () => element.find('i').text(),
+        link = window.location.hash,
+        slash = link.indexOf('/'),
+        bookId = link.substring(slash + 1);
+
+    BC.edit().increaseLikes(bookId, +(currentLikes()) + 1)
+        .then(success => {
+            if (success === 1) {
+                return element.find('i').text(+(currentLikes()) + 1);
+            }
+            console.log('DB update fail');
+        });
 });
 
 let app = new Sammy('#sammy-app');
 
-app.before({except: {path: ['#/', '#Login', '#Register']}}, context => {
-    if(!cookies.get('user')){
+app.before({ except: { path: ['#/', '#Login', '#Register'] } }, context => {
+    if (!cookies.get('user')) {
         popup.alert('user not loged in !!!')
         context.redirect('#Login');
         return false;
-    } 
+    }
 
     context.isLogedin = true;
 })
@@ -72,6 +94,15 @@ app.get('#/', function (con) {
         let html = temp({ name: 'MAIN' });
         dynamicContainer.html(html);
     });
+});
+
+app.get('#cart', con => {
+    let currentBooksInCart = JSON.parse(sessionStorage.getItem('cart'));
+    let totalAmount = 0;
+    console.log(currentBooksInCart);
+    currentBooksInCart.forEach(b => totalAmount += +b._price);
+    // redirect to cart page
+    console.log(totalAmount);
 });
 
 app.get('#books/page/?:page', con => {
@@ -85,9 +116,16 @@ app.get('#books/page/?:page', con => {
 app.get('#books/:id', con => {
     let bookId = con.params.id;
     BC.get(bookId)
-        .then((html) => {
-            dynamicContainer.html(html);
+        .then((book) => {
+            BC.attachToTemplate(book, 'single-book')
+                .then(html => {
+                    dynamicContainer.html(html);
+                });
         });
+    // BC.get(bookId)
+    //     .then((html) => {
+    //         dynamicContainer.html(html);
+    //     });
 });
 
 app.get('#search/?:query&:page', con => {
