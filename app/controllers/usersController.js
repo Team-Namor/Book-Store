@@ -79,10 +79,12 @@ let usersController = {
         });
     },
 
-    logout(req, res) {;
+    logout(req, res) {
         res.clearCookie('user');
+        res.clearCookie('user-type');
         res.redirect('/#/');
-    }
+    },
+
 };
 
 module.exports = usersController;
