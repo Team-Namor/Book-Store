@@ -99,13 +99,13 @@ let app = new Sammy('#sammy-app');
 
 app.before({ except: { path: ['#/', '#Login', '#Register'] } }, context => {
     if (!cookies.get('user')) {
-        popup.alert('user not loged in !!!')
+        popup.alert('You must first login to view our catalogue.')
         context.redirect('#Login');
         return false;
     }
 
     context.isLogedin = true;
-})
+});
 
 app.get('#/', function (con) {
     template.get('home').then(temp => {

@@ -22,9 +22,6 @@ import 'jquery';
        requester.post('/login', userContext.params)
            .then(success => popUp.info('Successfully logged in!'))
            .then(() => {
-
-           })
-           .then(() => {
                setTimeout(function(){
                    userContext.redirect('#books/page/1')
                }, 1000)

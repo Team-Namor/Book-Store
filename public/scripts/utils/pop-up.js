@@ -9,7 +9,9 @@ popUpDiv.css({
     width: '100%',
     display: 'none',
     'text-align': 'center',
-    padding: '10px'
+    padding: '10px',
+    color: '#fff',
+    fontWeight: 'bold'
 });
 
 let popUp = {
