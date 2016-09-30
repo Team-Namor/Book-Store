@@ -45,23 +45,6 @@ class BookController {
         });
     }
 
-
-
-    // get(id) {
-    //     let book;
-    //     return new Promise((resolve, reject) => {
-    //         requester.get('/books/' + id)
-    //             .then(data => {
-    //                 book = data;
-    //                 return template.get('single-book');
-    //             }).then((template) => {
-    //                 let obj = { book: book };
-    //                 let html = template(obj);
-    //                 resolve(html);
-    //             });
-    //     });
-    // }
-
     searchBy(param, page) {
         let book;
         return new Promise((resolve, reject) => {
