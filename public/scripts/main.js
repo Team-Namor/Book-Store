@@ -106,6 +106,13 @@ app.before({ except: { path: ['#/', '#Login', '#Register'] } }, context => {
 
     context.isLogedin = true;
     context.userType = cookies.get('user-type');
+ let adminNavItem = $('#admin-nav-item');
+
+    if(context.userType === 'admin'){
+        adminNavItem.show();
+    } else{
+        adminNavItem.hide();
+    }
 });
 
 app.get('#/', function (con) {

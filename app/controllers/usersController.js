@@ -70,7 +70,7 @@ let usersController = {
 
             if(user) {
                 res.cookie('user', user._id);
-                res.cookie('user-type', user.userType);
+                res.cookie('user-type', user._userType);
                 res.send();
             }
             else{

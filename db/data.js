@@ -1,6 +1,7 @@
 var Datastore = require('nedb');
 var getNewCategory = require('./models/category.js');
 var Book = require('./models/book.js');
+var User = require('./models/user.js');
 
 var db = {};
 
@@ -148,8 +149,12 @@ let book2 = new Book("1984", "George Orwell", 1924, "Science Fiction", lorem, "h
 let book4 = new Book("Just another book", "Jack", 1999, "Thriller", lorem, "https://s-media-cache-ak0.pinimg.com/236x/d2/0b/29/d20b291bd20bf99262d4dbdc41ded105.jpg", 10, 4312);
 let book6 = new Book("Ripe", "Julia Moulden", 2012, "Comedy", lorem, "https://upload.wikimedia.org/wikipedia/en/b/b3/Book_Cover_V2.jpeg", 20, 41);
 
+
 data.addBook(book2);
 data.addBook(book4);
 data.addBook(book6);
+
+let admin = new User('admin','admin','admin','admin@admin.com','admin');
+data.addUser(admin);
 
 module.exports = data;
