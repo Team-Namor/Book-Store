@@ -77,13 +77,13 @@ dynamicContainer.on('click', '#like-btn', function (ev) {
         });
 });
 
-$('#main-wrapper').on('mouseover', '#cart-btn', function () {
+$('#cart-btn').on('mouseover', function () {
     let currentBooksInCart = JSON.parse(sessionStorage.getItem('cart'));
     let totalAmount = 0;
     for (let book of currentBooksInCart) {
        totalAmount += +book._price;
     }
-    
+
     template.get('cart-dropdown').then(template => {
         let obj = { book: currentBooksInCart, amount: totalAmount };
         let html = template(obj);
@@ -91,7 +91,7 @@ $('#main-wrapper').on('mouseover', '#cart-btn', function () {
     });
 });
 
-$('#main-wrapper').on('mouseout', '.total', function () {
+$('#cart-btn').on('mouseout', function () {
     $("#dropdown-cart").html('');
 });
 
