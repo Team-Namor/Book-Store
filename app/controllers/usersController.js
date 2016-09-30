@@ -43,6 +43,7 @@ let usersController = {
                         
                         foundUserPromise.then(function(foundUser) {
                             res.cookie('user', foundUser._id);
+                            res.cookie('user-type', foundUser._userType);
                             res.send();
                         });
 
@@ -69,6 +70,7 @@ let usersController = {
 
             if(user) {
                 res.cookie('user', user._id);
+                res.cookie('user-type', user.userType);
                 res.send();
             }
             else{

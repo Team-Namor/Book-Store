@@ -105,6 +105,7 @@ app.before({ except: { path: ['#/', '#Login', '#Register'] } }, context => {
     }
 
     context.isLogedin = true;
+    context.userType = cookies.get('user-type');
 });
 
 app.get('#/', function (con) {
