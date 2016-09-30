@@ -77,6 +77,24 @@ dynamicContainer.on('click', '#like-btn', function (ev) {
         });
 });
 
+$('#cart-btn').on('mouseover', function () {
+    let currentBooksInCart = JSON.parse(sessionStorage.getItem('cart'));
+    let totalAmount = 0;
+    for (let book of currentBooksInCart) {
+       totalAmount += +book._price;
+    }
+
+    template.get('cart-dropdown').then(template => {
+        let obj = { book: currentBooksInCart, amount: totalAmount };
+        let html = template(obj);
+        $("#dropdown-cart").html(html);
+    });
+});
+
+$('#cart-btn').on('mouseout', function () {
+    $("#dropdown-cart").html('');
+});
+
 let app = new Sammy('#sammy-app');
 
 app.before({ except: { path: ['#/', '#Login', '#Register'] } }, context => {
@@ -96,14 +114,13 @@ app.get('#/', function (con) {
     });
 });
 
-app.get('#cart', con => {
-    let currentBooksInCart = JSON.parse(sessionStorage.getItem('cart'));
-    let totalAmount = 0;
-    console.log(currentBooksInCart);
-    currentBooksInCart.forEach(b => totalAmount += +b._price);
-    // redirect to cart page
-    console.log(totalAmount);
-});
+// app.get('#cart', con => {
+//     let currentBooksInCart = JSON.parse(sessionStorage.getItem('cart'));
+//     let totalAmount = 0;
+//     console.log(currentBooksInCart);
+//     currentBooksInCart.forEach(b => totalAmount += +b._price);
+//     // redirect to cart page
+// });
 
 app.get('#books/page/?:page', con => {
     let page = +con.params.page;
@@ -122,10 +139,6 @@ app.get('#books/:id', con => {
                     dynamicContainer.html(html);
                 });
         });
-    // BC.get(bookId)
-    //     .then((html) => {
-    //         dynamicContainer.html(html);
-    //     });
 });
 
 app.get('#search/?:query&:page', con => {
