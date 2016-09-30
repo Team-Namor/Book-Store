@@ -1,0 +1,15 @@
+<div id='container'>
+     {{#book}}
+     <div class="left">
+         <img style="width:50px; height:60px" src="{{_imgURL}}" alt="book cover">
+     </div>
+     <div class="right">
+         <span>Title: {{_title}}</span>
+         <span>1x ${{_price}}</span>
+     </div>
+     {{/book}}
+     <div>
+         <span>Total amount: {{amount}}</span>
+         <button>Pay</button>
+     </div>
+</div>
