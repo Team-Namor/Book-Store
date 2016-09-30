@@ -31,7 +31,9 @@ import 'jquery';
     }
 
     logout(context) {
+        sessionStorage.clear();
         requester.get('/logout', context)
+            .then(() => { this.showGuestMenu(); })
             .then(() => {
                 setTimeout(function(){
                     context.redirect('#/')
@@ -43,6 +45,12 @@ import 'jquery';
          $('#menu-user-login').hide();
          $('#menu-user-register').hide();
          $('#menu-user-logout').show();
+     }
+
+     showGuestMenu() {
+         $('#menu-user-login').show();
+         $('#menu-user-register').show();
+         $('#menu-user-logout').hide();
      }
 }
 
