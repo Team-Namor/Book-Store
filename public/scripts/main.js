@@ -45,14 +45,10 @@ dynamicContainer.on('click', '#add-to-cart-btn', function (ev) {
         slash = link.indexOf('/'),
         bookId = link.substring(slash + 1);
 
-    let text = $('#bookPrice').html();
-    let price = text.substring(14, text.length - 1);
     BC.get(bookId).then(data => {
         let cartInfo = JSON.parse(sessionStorage.getItem('cart')) || [];
         cartInfo.push(data[0]);
         sessionStorage.setItem('cart', JSON.stringify(cartInfo));
-
-        // TODO show msg added to cart
 
         let currentAmount = +$('.total').html().substring(1),
             newAMount = (currentAmount + data[0]._price).toFixed(2);
@@ -80,15 +76,17 @@ dynamicContainer.on('click', '#like-btn', function (ev) {
 $('#cart-btn').on('mouseover', function () {
     let currentBooksInCart = JSON.parse(sessionStorage.getItem('cart'));
     let totalAmount = 0;
-    for (let book of currentBooksInCart) {
-       totalAmount += +book._price;
-    }
+    if (currentBooksInCart !== null) {
+        for (let book of currentBooksInCart) {
+            totalAmount += +book._price;
+        }
 
-    template.get('cart-dropdown').then(template => {
-        let obj = { book: currentBooksInCart, amount: totalAmount };
-        let html = template(obj);
-        $("#dropdown-cart").html(html);
-    });
+        template.get('cart-dropdown').then(template => {
+            let obj = { book: currentBooksInCart, amount: totalAmount };
+            let html = template(obj);
+            $("#dropdown-cart").html(html);
+        });
+    }
 });
 
 $('#cart-btn').on('mouseout', function () {
@@ -110,11 +108,11 @@ app.before({ except: { path: ['#/', '#Login', '#Register'] } }, context => {
 
     context.isLogedin = true;
     context.userType = cookies.get('user-type');
- let adminNavItem = $('#admin-nav-item');
+    let adminNavItem = $('#admin-nav-item');
 
-    if(context.userType === 'admin'){
+    if (context.userType === 'admin') {
         adminNavItem.show();
-    } else{
+    } else {
         adminNavItem.hide();
     }
 });

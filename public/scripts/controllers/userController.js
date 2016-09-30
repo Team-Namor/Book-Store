@@ -31,6 +31,7 @@ import 'jquery';
     }
 
     logout(context) {
+         $('.total').html(`$0.00`);
         sessionStorage.clear();
         requester.get('/logout', context)
             .then(() => { this.showGuestMenu(); })
