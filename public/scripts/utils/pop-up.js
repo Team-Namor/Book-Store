@@ -3,16 +3,14 @@ import 'jquery';
 let popUpDiv = $('<div/>');
 
 popUpDiv.css({
-    position: 'absolute',
+    position: 'fixed',
     top: 0,
     left: 0,
     width: '100%',
     display: 'none',
     'text-align': 'center',
     padding: '10px'
-})
-
-
+});
 
 let popUp = {
     info(text) {
