@@ -104,6 +104,10 @@ app.before({ except: { path: ['#/', '#Login', '#Register'] } }, context => {
         return false;
     }
 
+    $('#menu-user-login').hide();
+    $('#menu-user-register').hide();
+    $('#menu-user-logout').show();
+
     context.isLogedin = true;
 });
 
@@ -113,14 +117,6 @@ app.get('#/', function (con) {
         dynamicContainer.html(html);
     });
 });
-
-// app.get('#cart', con => {
-//     let currentBooksInCart = JSON.parse(sessionStorage.getItem('cart'));
-//     let totalAmount = 0;
-//     console.log(currentBooksInCart);
-//     currentBooksInCart.forEach(b => totalAmount += +b._price);
-//     // redirect to cart page
-// });
 
 app.get('#books/page/?:page', con => {
     let page = +con.params.page;
@@ -159,14 +155,6 @@ app.get('#categories', con => {
     CC.index(dynamicContainer);
 });
 
-app.get('#link3', con => {
-    template.get('link').then(temp => {
-        let html = temp({ name: 'LINK3' });
-
-        dynamicContainer.html(html);
-    });
-});
-
 /* Register user */
 app.get('#Register', con => {
     template.get('register').then(temp => {
@@ -193,6 +181,9 @@ app.post('#Login', con => {
     UC.login(con);
 });
 
+app.get("#Logout", con => {
+    UC.logout(con);
+});
 
 app.get('#Admin', con => {
     UC.login(con.params);

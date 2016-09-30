@@ -55,9 +55,7 @@ app.get('/admin', authenticate, function(req, res){
 });
 
 app.get('/logout', function (req, res) {
-    req.session.destroy(function(){
-        res.redirect('/');
-    });
+    userController.logout(req, res);
 });
 
 var port = 3333;

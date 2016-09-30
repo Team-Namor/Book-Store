@@ -21,6 +21,7 @@ import 'jquery';
     login(userContext) {
        requester.post('/login', userContext.params)
            .then(success => popUp.info('Successfully logged in!'))
+           .then(() => { this.showUserMenu(); })
            .then(() => {
                setTimeout(function(){
                    userContext.redirect('#books/page/1')
@@ -29,13 +30,20 @@ import 'jquery';
            .catch(err => popUp.alert(err.responseText))
     }
 
-    edit() {
-
+    logout(context) {
+        requester.get('/logout', context)
+            .then(() => {
+                setTimeout(function(){
+                    context.redirect('#/')
+                }, 1000)
+            })
     }
 
-    delete() {
-
-    }
+     showUserMenu() {
+         $('#menu-user-login').hide();
+         $('#menu-user-register').hide();
+         $('#menu-user-logout').show();
+     }
 }
 
 export default UserController;

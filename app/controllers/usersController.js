@@ -75,6 +75,11 @@ let usersController = {
                 res.status(400).send('Login failed! Please enter valid credentials.');
             }
         });
+    },
+
+    logout(req, res) {;
+        res.clearCookie('user');
+        res.redirect('/#/');
     }
 };
 
