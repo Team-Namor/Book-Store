@@ -1,6 +1,12 @@
 html {
     background: url('images/bookshelf.jpg') no-repeat center center fixed black;
-    background-size: cover
+    background-size: cover;
+    height:100%;
+}
+
+body{
+    line-height:1.7;
+    height:100%;
 }
 
 .bg-transperant {
@@ -11,9 +17,31 @@ html {
     background: rgba(0, 0, 0, 0.1)
 }
 
+.page-title{
+    background-color: #13afc1 !important;
+    color:#fff;
+    padding:20px 0;
+}
+
+.btn-blue{
+    color: #fff;
+    background-color: #13afc1;
+    border-color: #4eb2c1;
+}
+.btn-blue:hover{
+    background-color: #1dbb90;
+    border-color: #0cbb83;
+}
+
+#main-wrapper{
+    height:100%;
+}
 #sammy-app,
-.background-transparent.active {
-    background: rgba(0, 0, 0, 0.3)!important;
+.background-transparent.active,
+#main-wrapper{
+    background-color: #f4f7f9;
+    padding:0;
+
 }
 
 .display-none {
@@ -154,4 +182,14 @@ header #main-nav .nav-item a.active{
 }
 #menu-user-logout {
     display: none;
+}
+
+/* Register */
+
+.main-center{
+    width: 50%;
+    background: #fff;
+    margin: 40px auto;
+    padding: 20px;
+    border:1px solid #ddd;
 }

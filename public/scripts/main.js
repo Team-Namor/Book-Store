@@ -24,6 +24,7 @@ nav.on('click', 'a', ev => {
     element.addClass('active');
 });
 
+
 /* books events */
 dynamicContainer.on('click', '#search-btn', function () {
     let searchedQuery = $('#search-value').val();

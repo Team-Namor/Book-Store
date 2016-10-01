@@ -6,10 +6,16 @@ SystemJS.config({
         'main': './scripts/main.js',
         'data': './scripts/data.js',
         'jquery': './bower_components/jquery/dist/jquery.js',
+        'tether': './bower_components/tether/dist/js/tether.min.js',
         'bootstrap': './bower_components/bootstrap/dist/js/bootstrap.min.js',
         'sammy': './bower_components/sammy/lib/min/sammy-latest.min.js',
         'handlebars': './bower_components/handlebars/handlebars.min.js',
         'template': './scripts/handlebars-template.js',
         'requester': './scripts/utils/jqueryJSONRequester.js',
+    },
+    'meta': {
+        'bootstrap': {
+            'deps': ['tether']
+        }
     }
 });
