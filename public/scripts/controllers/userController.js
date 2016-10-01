@@ -52,6 +52,7 @@ import 'jquery';
          $('#menu-user-login').show();
          $('#menu-user-register').show();
          $('#menu-user-logout').hide();
+         $('#admin-nav-item').hide();
      }
 }
 
