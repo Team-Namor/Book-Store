@@ -1,21 +1,26 @@
+{{#book}}
 <div id="homepage-carousel" class="carousel slide" data-ride="carousel">
     <div class="carousel-inner" role="listbox">
         <div class="carousel-item active">
             <img src="../style/images/slider/blue-background.jpg" alt="First slide">.
             <div id="book-caption-image" class="carousel-caption">
-                <img class="animated flipInX" src="../style/images/slider/dependency_inejction.png" />
+                <!--<img class="animated flipInX" src="../style/images/slider/dependency_inejction.png" />-->
+                <img class="animated flipInX" src="{{_imgURL}}" />
             </div>
             <div id="book-caption-text" class="carousel-caption">
-                <h2 class="animated fadeInRight">
-                    Dependency Injection in .NET <br>
-                    winner of the 2013 Jolt Awards
-                </h2>
-                <p class="animated fadeInRight">Presents core DI patterns in plain C#, so you'll fully understand how DI works</p>
+                <!--<h2 class="animated fadeInRight">-->
+                    <!--Dependency Injection in .NET <br>-->
+                    <!--winner of the 2013 Jolt Awards-->
+                <!--</h2>-->
+                <h2 class="animated fadeInRight">{{_title}}</h2>
+                <!--<p class="animated fadeInRight">Presents core DI patterns in plain C#, so you'll fully understand how DI works</p>-->
+                <p class="animated fadeInRight">{{trimString _description}}</p>
             </div>
             <div id="book-view-btn" class="carousel-caption animated flipInX">
-                <a class="btn btn-transparent" href="#books/id">Details</a>
+                <a class="btn btn-transparent" href="#books/{{_id}}">Details</a>
             </div>
         </div>
 
     </div>
 </div>
+{{/book}}

@@ -6,6 +6,11 @@ handlebars.registerHelper("inc", function(value, options)
     return parseInt(value) + 1;
 });
 
+handlebars.registerHelper('trimString', function(passedString) {
+    var theString = passedString.substring(0,450);
+    return theString + '...'
+});
+
 export  default {
     get(name){
         return new Promise((resolve, reject) => {

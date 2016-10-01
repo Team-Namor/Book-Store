@@ -216,6 +216,7 @@ header #main-nav .nav-item a.active{
     left: auto;
     padding-bottom: 30px;
     top: 5%;
+    max-width: 47.2%;
 }
 #book-caption-text h2{
     font-family: 'Love Ya Like A Sister', cursive;
@@ -227,6 +228,8 @@ header #main-nav .nav-item a.active{
     text-align: left;
 }
 #book-view-btn{
+    right: 45%;
+    left: auto;
     animation-delay: 5s;
 }
 .btn-transparent{
