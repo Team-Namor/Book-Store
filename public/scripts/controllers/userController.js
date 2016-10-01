@@ -1,5 +1,6 @@
 import requester from '../data/requester.js';
 import popUp from '../utils/pop-up.js'
+import template from 'template';
 import 'jquery';
 
  class UserController {
@@ -37,6 +38,14 @@ import 'jquery';
                     context.redirect('#/')
                 }, 1000)
             })
+    }
+
+    admin(context){
+        template.get('admin-dashboard')
+        .then(template => {
+            let html = template();
+            context.swap(html)
+        })
     }
 
      showUserMenu() {

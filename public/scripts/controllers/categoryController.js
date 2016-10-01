@@ -3,13 +3,16 @@ import template from 'template';
 import 'jquery';
 
 class CategoryController {
-    
-    index(element) {
+
+    constructor() {
+    }
+
+    index(context) {
         Promise.all([requester.get('/categories'), template.get('category')])
             .then(([category, template]) => {
                 let obj = {category: category};
                 let html = template(obj);
-                element.html(html);
+                context.swap(html);
             });
     }
 
@@ -17,7 +20,7 @@ class CategoryController {
         requester.post('/categories', newCategory);
     }
 
-    searchBooksByCategory(element, categoryName) {
+    searchBooksByCategory(context, categoryName) {
         Promise.all([requester.get('/books'), template.get('booksByCategory')])
             .then(([books, template]) => {
                 let filteredBooks = books.find(book=>book._category === categoryName);
@@ -26,7 +29,7 @@ class CategoryController {
                 };
 
                 let html = template(obj);
-                element.append(html);
+               context.$element().append(html);
             });
     }
 }

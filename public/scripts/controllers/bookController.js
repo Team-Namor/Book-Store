@@ -64,8 +64,8 @@ class BookController {
         });
     }
 
-    add(bookData) {
-        requester.post('/books', bookData);
+    add(context) {
+        return  requester.post('/books', context.params);       
     }
 
     edit() {
