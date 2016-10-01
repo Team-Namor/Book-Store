@@ -20,16 +20,7 @@ app.use(session({
     saveUninitialized: true
 }));
 
-// Authentication and Authorization Middleware
-function authenticate(req, res, next) {
-    /*if (req.session.user) {
-        next();
-    } else {
-        req.session.error = 'Access denied!';
-        res.redirect('/#login');
-    }*/
-}
-
+/* Routes */
 app.get('/books', bookController.get);
 
 app.post('/books', bookController.add);
@@ -50,7 +41,7 @@ app.post('/login', function(req, res) {
     userController.login(req, res);
 });
 
-app.get('/admin', authenticate, function(req, res){
+app.get('/admin', function(req, res){
     res.send('admin logged in');
 });
 
