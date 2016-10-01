@@ -199,3 +199,41 @@ header #main-nav .nav-item a.active{
 #homepage-carousel .carousel-inner{
     max-height:400px;
 }
+#homepage-carousel .carousel-item{
+    max-height:400px;
+}
+#book-caption-image{
+    left: 10%;
+    right: auto;
+    top: 4%;
+}
+#book-caption-image img{
+    height: 330px;
+    animation-delay: 2s;
+}
+#book-caption-text{
+    right: 5%;
+    left: auto;
+    padding-bottom: 30px;
+    top: 5%;
+}
+#book-caption-text h2{
+    font-family: 'Love Ya Like A Sister', cursive;
+    animation-delay: 3s;
+    text-align: left;
+}
+#book-caption-text p{
+    animation-delay: 4s;
+    text-align: left;
+}
+#book-view-btn{
+    animation-delay: 5s;
+}
+.btn-transparent{
+    background:rgba(255,255,255, 0.1);
+    border: 2px solid #fff;
+    color:#fff;
+}
+.btn-transparent:hover{
+    color:#fff;
+}

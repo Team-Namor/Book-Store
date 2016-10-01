@@ -1,5 +1,4 @@
 (function($) {
-
     //Function to animate slider captions
     function doAnimations( elems ) {
         var animEndEv = 'webkitAnimationEnd animationend';
