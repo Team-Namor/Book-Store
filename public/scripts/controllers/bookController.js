@@ -1,13 +1,12 @@
-import requester from '../utils/jqueryJSONRequester.js';
+import requester from '../data/requester.js';
 import template from 'template';
 import 'jquery';
 
 const SIZE = 6;
 
 class BookController {
-    constructor() { }
+
     index(page) {
-        //  return getData('/books');
         let book;
         return new Promise((resolve, reject) => {
             requester.get('/books')

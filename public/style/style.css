@@ -193,3 +193,9 @@ header #main-nav .nav-item a.active{
     padding: 20px;
     border:1px solid #ddd;
 }
+
+/* homepage */
+
+#homepage-carousel .carousel-inner{
+    max-height:400px;
+}

@@ -1,11 +1,9 @@
-import requester from '../utils/jqueryJSONRequester.js';
+import requester from '../data/requester.js';
 import template from 'template';
 import 'jquery';
 
 class CategoryController {
-    constructor() {
-    }
-
+    
     index(element) {
         Promise.all([requester.get('/categories'), template.get('category')])
             .then(([category, template]) => {
@@ -25,9 +23,8 @@ class CategoryController {
                 let filteredBooks = books.find(book=>book._category === categoryName);
                 let obj={
                     books:[filteredBooks]
-                }
-                //obj=JSON.stringify(obj)
-               // console.log(obj);
+                };
+
                 let html = template(obj);
                 element.append(html);
             });

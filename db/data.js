@@ -22,6 +22,7 @@ let data = {
             });
         });
     },
+    
     getBookById(req) {
         return new Promise((resolve, reject) => {
             db.books.find({ _id: req.params.id }, (err, book) => {
@@ -33,6 +34,7 @@ let data = {
             });
         });
     },
+    
     addBook(book) {
         return new Promise((resolve, reject) => {
             db.books.insert(book, function (err, newBook) {
@@ -45,6 +47,7 @@ let data = {
         });
 
     },
+    
     updateBook(update, bookToBeUpdated) {
         return new Promise((resolve, reject) => {
             db.books.update({ "_id": bookToBeUpdated }, { $set: update }, { returnUpdatedDocs: true }, function (err, result) {
@@ -57,6 +60,7 @@ let data = {
         });
 
     },
+    
     getCategories() {
         return new Promise((resolve, reject) => {
             db.categories.find({}, (err, categories) => {
@@ -68,6 +72,7 @@ let data = {
             });
         });
     },
+    
     postCategory(category) {
         return new Promise((resolve, reject) => {
             db.categories.insert(category, function (err, newCategory) {
