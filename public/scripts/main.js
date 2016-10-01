@@ -3,7 +3,8 @@ import Sammy from 'sammy';
 import template from 'template';
 import cookies from 'scripts/utils/cookies.js';
 import popup from 'scripts/utils/pop-up.js';
-
+import Tether from 'tether'
+import 'bootstrap';
 /* Controllers */
 import UserController from 'scripts/controllers/userController.js';
 import BookController from 'scripts/controllers/bookController.js';

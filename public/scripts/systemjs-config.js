@@ -15,7 +15,9 @@ SystemJS.config({
     },
     'meta': {
         'bootstrap': {
-            'deps': ['tether']
+            globals: {
+                Tether: 'tether'
+            }
         }
     }
 });
