@@ -1,7 +1,7 @@
 # Team-Namor-2016-Project
 
 ##### [<img src="https://raw.githubusercontent.com/TelerikAcademy/Common/master/icons/presentation.png" height="18"/>Presentation Slides](https://rawgit.com/Team-Namor/Presentation/master/index.html#/)
-##### [<img src="https://"//TODO.."/images/youtube.png" height="22"/> Project's Video](https://youtube.com)
+##### [<img src="https://rawgit.com/Team-Namor/Presentation/master/imgs/youtube.png" height="22"/> Project's Video](https://youtube.com)
 
 # Book-Store
 
