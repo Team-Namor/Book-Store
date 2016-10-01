@@ -1,0 +1,30 @@
+ <div class="row">
+        {{#each books}}
+            {{#if _title}}
+            <div class="book col-xs-6 col-sm-4 col-md-4 col-lg-2" id="{{_id}}">
+                <img class="book-cover" src="{{_imgURL}}" alt="bookCover">
+                <ul class='book-info'>
+                    <li><b>Title: </b><span>{{_title}}</span></li>
+                    <li><b>Author: </b><span>{{_author}}</span></li>
+                    <li><b>Year: </b><span>{{_year}}</span></li>
+                </ul>
+            </div>
+            {{else}}
+                <div><h2>No books in this category</h2></div>
+            {{/if}}
+        {{/each}}
+    </div>
+    <div class="row">
+        <ul class="pagination">
+            {{#if books.hasQuery}}
+                {{#each books.size}}
+                    <li class="page-item"><a href="#search/{{this}}&{{inc @index}}" class="page-link">{{inc @index}}</a>
+                    </li>
+                {{/each}}
+            {{else}}
+                {{#each books.size}}
+                    <li class="page-item"><a href="#books/page/{{inc @index}}" class="page-link">{{inc @index}}</a></li>
+                {{/each}}
+            {{/if}}
+        </ul>
+    </div>

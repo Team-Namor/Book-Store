@@ -161,6 +161,18 @@ app.get('#categories', con => {
     CC.index(dynamicContainer);
 });
 
+app.get('#categories/:category', con => {
+    let categoryName=con.params.category;
+    template.get('category').then(temp => {
+        let html = temp({ name: 'Categories' })
+
+        dynamicContainer.html(html);
+
+    })
+    CC.index(dynamicContainer);
+    CC.searchBooksByCategory(dynamicContainer, categoryName);
+});
+
 /* Register user */
 app.get('#Register', con => {
     template.get('register').then(temp => {
