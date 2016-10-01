@@ -3,7 +3,6 @@ import Sammy from 'sammy';
 import template from 'template';
 import cookies from 'scripts/utils/cookies.js';
 import popup from 'scripts/utils/pop-up.js';
-import Tether from 'tether'
 import 'bootstrap';
 /* Controllers */
 import UserController from 'scripts/controllers/userController.js';
@@ -25,54 +24,64 @@ nav.on('click', 'a', ev => {
     element.addClass('active');
 });
 
+let app = new Sammy('#sammy-app');
 
 /* books events */
-dynamicContainer.on('click', '#search-btn', function () {
-    let searchedQuery = $('#search-value').val();
-    if (searchedQuery !== '') {
-        window.location.href = (`#search/${searchedQuery}&${1}`);
+app.bind('click', function (ev) {
+    if (ev.target.id === 'search-btn') {
+        let searchedQuery = $('#search-value').val();
+        if (searchedQuery !== '') {
+            app.setLocation(`#search/${searchedQuery}&${1}`);
+        }
     }
 });
 
-dynamicContainer.on('click', '.book-cover', function (ev) {
-    let element = $(ev.target);
-    let parent = element.parent();
-    let bookId = $(parent).attr('id');
-    window.location.href = (`#books/${bookId}`);
+app.bind('click', function (ev) {
+    if (ev.target.className.includes('book-cover')) {
+        let element = $(ev.target);
+        let parent = element.parent();
+        let bookId = $(parent).attr('id');
+        app.setLocation(`#books/${bookId}`);
+    }
 });
 
-dynamicContainer.on('click', '#add-to-cart-btn', function (ev) {
-    let element = $(ev.target),
-        link = window.location.hash,
-        slash = link.indexOf('/'),
-        bookId = link.substring(slash + 1);
+app.bind('click', function (ev) {
+    if (ev.target.id === 'add-to-cart-btn') {
+        let element = $(ev.target),
+            link = window.location.hash,
+            slash = link.indexOf('/'),
+            bookId = link.substring(slash + 1);
 
-    BC.get(bookId).then(data => {
-        let cartInfo = JSON.parse(sessionStorage.getItem('cart')) || [];
-        cartInfo.push(data[0]);
-        sessionStorage.setItem('cart', JSON.stringify(cartInfo));
+        BC.get(bookId).then(data => {
+            let cartInfo = JSON.parse(sessionStorage.getItem('cart')) || [];
+            cartInfo.push(data[0]);
+            sessionStorage.setItem('cart', JSON.stringify(cartInfo));
 
-        let currentAmount = +$('.total').html().substring(1),
-            newAMount = (currentAmount + data[0]._price).toFixed(2);
-        $('.total').html(`$${newAMount}`);
+            let currentAmount = +$('.total').html().substring(1),
+                newAMount = (currentAmount + data[0]._price).toFixed(2);
+            $('.total').html(`$${newAMount}`);
 
-    });
-});
-
-dynamicContainer.on('click', '#like-btn', function (ev) {
-    let element = $(event.target),
-        currentLikes = () => element.find('i').text(),
-        link = window.location.hash,
-        slash = link.indexOf('/'),
-        bookId = link.substring(slash + 1);
-
-    BC.edit().increaseLikes(bookId, +(currentLikes()) + 1)
-        .then(success => {
-            if (success === 1) {
-                return element.find('i').text(+(currentLikes()) + 1);
-            }
-            console.log('DB update fail');
         });
+    }
+});
+
+app.bind('click', function (ev, test) {
+    if (ev.target.id === 'like-btn') {
+        console.log(`click ${event.target}`)
+        let element = $(event.target),
+            currentLikes = () => element.find('i').text(),
+            link = window.location.hash,
+            slash = link.indexOf('/'),
+            bookId = link.substring(slash + 1);
+
+        BC.edit().increaseLikes(bookId, +(currentLikes()) + 1)
+            .then(success => {
+                if (success === 1) {
+                    return element.find('i').text(+(currentLikes()) + 1);
+                }
+                console.log('DB update fail');
+            });
+    }
 });
 
 $('#cart-btn').on('mouseover', function () {
@@ -95,7 +104,6 @@ $('#cart-btn').on('mouseout', function () {
     $("#dropdown-cart").html('');
 });
 
-let app = new Sammy('#sammy-app');
 
 app.before({ except: { path: ['#/', '#Login', '#Register'] } }, context => {
     if (!cookies.get('user')) {
@@ -122,7 +130,7 @@ app.before({ except: { path: ['#/', '#Login', '#Register'] } }, context => {
 app.get('#/', function (con) {
     template.get('home').then(temp => {
         let html = temp({ name: 'MAIN' });
-        dynamicContainer.html(html);
+        con.swap(html);
     });
 });
 
@@ -130,7 +138,7 @@ app.get('#books/page/?:page', con => {
     let page = +con.params.page;
     BC.index(page)
         .then(html => {
-            dynamicContainer.html(html);
+            con.swap(html);
         });
 });
 
@@ -140,16 +148,23 @@ app.get('#books/:id', con => {
         .then((book) => {
             BC.attachToTemplate(book, 'single-book')
                 .then(html => {
-                    dynamicContainer.html(html);
+                    con.swap(html);
                 });
         });
+});
+
+app.post('#books', context => {
+    BC.add(context).then(data => {
+        popup.info('book added');
+        context.redirect('#admin');
+    })
 });
 
 app.get('#search/?:query&:page', con => {
     let query = con.params.query;
     let page = +con.params.page;
     BC.searchBy(query, page).then((html) => {
-        dynamicContainer.html(html);
+        con.swap(html);
     });
 });
 
@@ -157,30 +172,26 @@ app.get('#categories', con => {
     template.get('category').then(temp => {
         let html = temp({ name: 'Categories' })
 
-        dynamicContainer.html(html);
+        con.swap(html);
     });
 
-    CC.index(dynamicContainer);
+    CC.index(con);
 });
 
 app.get('#categories/:category', con => {
-    let categoryName=con.params.category;
-    template.get('category').then(temp => {
-        let html = temp({ name: 'Categories' })
+    let categoryName = con.params.category;
 
-        dynamicContainer.html(html);
-
-    })
-    CC.index(dynamicContainer);
-    CC.searchBooksByCategory(dynamicContainer, categoryName);
+    CC.index(con);
+    CC.searchBooksByCategory(con, categoryName);
 });
+
 
 /* Register user */
 app.get('#Register', con => {
     template.get('register').then(temp => {
         let html = temp({ name: 'REGISTER' });
 
-        dynamicContainer.html(html);
+        app.swap(html);
     });
 });
 
@@ -193,7 +204,7 @@ app.get('#Login', con => {
     template.get('login').then(temp => {
         let html = temp({ name: 'LOGIN' });
 
-        dynamicContainer.html(html);
+        app.swap(html);
     });
 });
 
@@ -209,4 +220,7 @@ app.get('#Admin', con => {
     UC.login(con.params);
 });
 
+/* Admin */
+
+app.get('#admin', UC.admin)
 app.run('#/');
