@@ -3,15 +3,11 @@ import template from 'template';
 import 'jquery';
 
 class CategoryController {
-<<<<<<< HEAD
+
     constructor() {
     }
 
     index(context) {
-=======
-    
-    index(element) {
->>>>>>> feef7eef061ba97aed6730525e429cf2b870aabf
         Promise.all([requester.get('/categories'), template.get('category')])
             .then(([category, template]) => {
                 let obj = {category: category};

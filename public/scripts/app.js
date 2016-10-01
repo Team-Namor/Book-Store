@@ -2,11 +2,8 @@ import Sammy from 'sammy';
 import template from 'template';
 import cookies from 'scripts/utils/cookies.js';
 import popup from 'scripts/utils/pop-up.js';
-<<<<<<< HEAD:public/scripts/main.js
-=======
 import 'jquery';
 import Tether from 'tether'
->>>>>>> feef7eef061ba97aed6730525e429cf2b870aabf:public/scripts/app.js
 import 'bootstrap';
 
 /* Controllers */
@@ -19,8 +16,6 @@ let UC = new UserController();
 let BC = new BookController();
 let CC = new CategoryController();
 let dynamicContainer = $('#dynamic-container');
-
-<<<<<<< HEAD:public/scripts/main.js
 let nav = $('ul.nav');
 
 nav.on('click', 'a', ev => {
@@ -109,10 +104,6 @@ $('#cart-btn').on('mouseover', function () {
 $('#cart-btn').on('mouseout', function () {
     $("#dropdown-cart").html('');
 });
-
-=======
-let app = new Sammy('#sammy-app');
->>>>>>> feef7eef061ba97aed6730525e429cf2b870aabf:public/scripts/app.js
 
 app.before({ except: { path: ['#/', '#Login', '#Register'] } }, context => {
     if (!cookies.get('user')) {
@@ -241,80 +232,4 @@ $(document).ready(function() {
     });
 });
 
-let nav = $('ul.nav');
 
-nav.on('click', 'a', ev => {
-    let element = $(ev.target);
-
-    nav.find('a').removeClass('active');
-    element.addClass('active');
-});
-
-/* books events */
-dynamicContainer.on('click', '#search-btn', function () {
-    let searchedQuery = $('#search-value').val();
-    if (searchedQuery !== '') {
-        window.location.href = (`#search/${searchedQuery}&${1}`);
-    }
-});
-
-dynamicContainer.on('click', '.book-cover', function (ev) {
-    let element = $(ev.target);
-    let parent = element.parent();
-    let bookId = $(parent).attr('id');
-    window.location.href = (`#books/${bookId}`);
-});
-
-dynamicContainer.on('click', '#add-to-cart-btn', function (ev) {
-    let element = $(ev.target),
-        link = window.location.hash,
-        slash = link.indexOf('/'),
-        bookId = link.substring(slash + 1);
-
-    BC.get(bookId).then(data => {
-        let cartInfo = JSON.parse(sessionStorage.getItem('cart')) || [];
-        cartInfo.push(data[0]);
-        sessionStorage.setItem('cart', JSON.stringify(cartInfo));
-
-        let currentAmount = +$('.total').html().substring(1),
-            newAMount = (currentAmount + data[0]._price).toFixed(2);
-        $('.total').html(`$${newAMount}`);
-
-    });
-});
-
-dynamicContainer.on('click', '#like-btn', function (ev) {
-    let element = $(event.target),
-        currentLikes = () => element.find('i').text(),
-        link = window.location.hash,
-        slash = link.indexOf('/'),
-        bookId = link.substring(slash + 1);
-
-    BC.edit().increaseLikes(bookId, +(currentLikes()) + 1)
-        .then(success => {
-            if (success === 1) {
-                return element.find('i').text(+(currentLikes()) + 1);
-            }
-            console.log('DB update fail');
-        });
-});
-
-$('#cart-btn').on('mouseover', function () {
-    let currentBooksInCart = JSON.parse(sessionStorage.getItem('cart'));
-    let totalAmount = 0;
-    if (currentBooksInCart !== null) {
-        for (let book of currentBooksInCart) {
-            totalAmount += +book._price;
-        }
-
-        template.get('cart-dropdown').then(template => {
-            let obj = { book: currentBooksInCart, amount: totalAmount };
-            let html = template(obj);
-            $("#dropdown-cart").html(html);
-        });
-    }
-});
-
-$('#cart-btn').on('mouseout', function () {
-    $("#dropdown-cart").html('');
-});
