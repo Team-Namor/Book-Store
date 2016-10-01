@@ -18,10 +18,6 @@ class User {
     }
 
     set userType(value) {
-       /* if(!validator.equals(value, 'admin') || !validator.equals(value, 'user')) {
-            throw new Error('User type must be admin or user.');
-        }*/
-
         this._userType = value;
     }
 
@@ -45,8 +41,7 @@ class User {
         if(!validator.isAlpha(value)) {
             throw new Error('Lastname must contain only letters.');
         }
-
-
+        
         this._lastName = value;
     }
 

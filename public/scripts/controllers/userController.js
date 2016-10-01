@@ -1,12 +1,9 @@
-import requester from '../utils/jqueryJSONRequester.js' ;
+import requester from '../data/requester.js';
 import popUp from '../utils/pop-up.js'
 import template from 'template';
 import 'jquery';
 
  class UserController {
-    constructor(){
-
-    }
 
     add(userContext) {
         requester.post('/register', userContext.params)

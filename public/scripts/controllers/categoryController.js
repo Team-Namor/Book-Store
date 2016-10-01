@@ -1,12 +1,17 @@
-import requester from '../utils/jqueryJSONRequester.js';
+import requester from '../data/requester.js';
 import template from 'template';
 import 'jquery';
 
 class CategoryController {
+<<<<<<< HEAD
     constructor() {
     }
 
     index(context) {
+=======
+    
+    index(element) {
+>>>>>>> feef7eef061ba97aed6730525e429cf2b870aabf
         Promise.all([requester.get('/categories'), template.get('category')])
             .then(([category, template]) => {
                 let obj = {category: category};
@@ -25,9 +30,8 @@ class CategoryController {
                 let filteredBooks = books.find(book=>book._category === categoryName);
                 let obj={
                     books:[filteredBooks]
-                }
-                //obj=JSON.stringify(obj)
-               // console.log(obj);
+                };
+
                 let html = template(obj);
                context.$element().append(html);
             });
