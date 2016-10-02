@@ -3,13 +3,13 @@
 ##### [<img src="https://raw.githubusercontent.com/TelerikAcademy/Common/master/icons/presentation.png" height="18"/>Presentation Slides](https://rawgit.com/Team-Namor/Presentation/master/index.html#/)
 ##### [<img src="https://rawgit.com/Team-Namor/Presentation/master/imgs/youtube.png" height="22"/> Project's Video](https://youtube.com)
 
-# Book-Store
+# Bookshelf
 
 This document describes the teamwork assignment for Telerik Academy students in JavaScript-applications course
 
 ## Project Description 
 
-  "Book store" is a virtual store where customers can browse the
+  "Bookshelf" is a virtual store where customers can browse the
   catalog and select books of interest. The selected books may be collected in a shopping cart.
   
 ### Home section 

@@ -131,7 +131,7 @@ class BookController {
 
     edit() {
         function increaseLikes(bookId, newLikes) {
-            return requester.put(`/books/${bookId}`, { likes: newLikes })
+            return requester.put(`/books/${bookId}`, { likes: newLikes });
         }
 
         return {
@@ -151,7 +151,6 @@ class BookController {
                 let obj = { book: currentBooksInCart, amount: totalAmount };
                 let html = template(obj);
 
-                console.log('+1');
                 $("#dropdown-cart").html(html);
             });
         }
