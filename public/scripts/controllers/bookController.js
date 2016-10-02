@@ -2,7 +2,7 @@ import requester from '../data/requester.js';
 import template from 'template';
 import 'jquery';
 
-const SIZE = 10;
+const SIZE = 3;
 
 class BookController {
 
@@ -12,28 +12,27 @@ class BookController {
 
         return new Promise((resolve, reject) => {
             requester.get('/books')
+                .then(data => {
+                    book = data;
+                    return template.get('book');
+                })
                 .then(
                     requester.get('/categories')
                         .then(data => {
                             categories = data;
                         })
-
                 )
-                .then(data => {
-                    book = data;
-                    return template.get('book');
-                })
                 .then((template) => {
                     let currentPage = book.slice((page - 1) * SIZE, (page - 1) * SIZE + SIZE);
                     let buttonsCount = Array(Math.ceil(book.length / SIZE)).fill(1);
 
                     let obj = {
+                        categories: categories,
                         books: {
                             book: currentPage,
                             size: buttonsCount,
                             hasQuery: false
-                        },
-                        categories: categories
+                        }
                     };
                     let html = template(obj);
                     resolve(html);
@@ -69,17 +68,16 @@ class BookController {
         });
     }
 
-    searchBy(param, page, isCategory = false) {
-        let book;
+    searchBy(param, page, isCategory) {
+        let book,
+            categories;
+
         return new Promise((resolve, reject) => {
             requester.get('/books')
                 .then((data) => {
                     let paramToLower = param.toLowerCase();
 
-                    console.log("isCat = " + isCategory);
-                    console.log("param = " + paramToLower);
-
-                    if(isCategory) {
+                    if(isCategory === 'true') {
                         book = data.filter(
                             b =>  b._category.toLowerCase().indexOf(paramToLower) > -1
                         );
@@ -93,11 +91,26 @@ class BookController {
                     }
 
                     return template.get('book');
-                }).then((templ) => {
+                })
+                .then(
+                    requester.get('/categories')
+                        .then(data => {
+                            categories = data;
+                        })
+
+                )
+                .then((templ) => {
                     let currentPage = book.slice((page - 1) * SIZE, (page - 1) * SIZE + SIZE);
                     let buttonsCount = Array(Math.ceil(book.length / SIZE)).fill(param);
 
-                    let searchedBooksObject = { books: { book: currentPage, size: buttonsCount, hasQuery: true } };
+                    let searchedBooksObject = {
+                        categories: categories,
+                        books: {
+                            book: currentPage,
+                            size: buttonsCount,
+                            hasQuery: true
+                        }
+                    };
                     let html = templ(searchedBooksObject);
                     resolve(html);
                 });

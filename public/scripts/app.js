@@ -23,7 +23,7 @@ app.bind('click', function (ev) {
     if (ev.target.id === 'search-btn') {
         let searchedQuery = $('#search-value').val();
         if (searchedQuery !== '') {
-            app.setLocation(`#search/${searchedQuery}&${1}&${2}`);
+            app.setLocation(`#search/${searchedQuery}&${1}&false`);
         }
         else{
             app.setLocation(`#books/page/1`);
