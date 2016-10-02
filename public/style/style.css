@@ -433,5 +433,23 @@ header #main-nav .nav-item a.active{
 }
 #search-btn{
     line-height: 1.4;
-    background:#1dbb90 ;
+    background:#018763;
+}
+
+.page-item{
+    display: inherit;
+    border: 2px solid #1dbb90;
+    color: #ffffff;
+    background-color: #1dbb90;
+}
+.page-link{
+    color:#fff;
+    background:transparent;
+}
+.page-link.active{
+    background:#fff;
+    color:#1dbb90;
+}
+.pagination{
+    margin: 30px 15px;
 }

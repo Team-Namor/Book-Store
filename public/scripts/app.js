@@ -32,6 +32,19 @@ app.bind('click', function (ev) {
 });
 
 app.bind('click', function (ev) {
+    if (ev.target.className === 'page-link') {
+        let element = $(ev.target);
+
+        $('.pagination').find('a').removeClass('active');
+        element.addClass('active');
+
+        var body = $("html, body");
+            body.stop().animate({scrollTop:0}, '500', 'swing', function() {
+        });
+    }
+});
+
+app.bind('click', function (ev) {
     if (ev.target.id === 'add-to-cart-btn') {
         let element = $(ev.target);
             /*link = window.location.hash,
@@ -227,6 +240,7 @@ nav.on('click', 'a', ev => {
     nav.find('a').removeClass('active');
     element.addClass('active');
 });
+
 
 function SetActiveLink(name){
     let nav = $('#main-nav');
