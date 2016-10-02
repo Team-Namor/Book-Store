@@ -32,20 +32,13 @@ app.bind('click', function (ev) {
 });
 
 app.bind('click', function (ev) {
-    if (ev.target.className.includes('book-cover')) {
-        let element = $(ev.target);
-        let parent = element.parent();
-        let bookId = $(parent).attr('id');
-        app.setLocation(`#books/${bookId}`);
-    }
-});
-
-app.bind('click', function (ev) {
     if (ev.target.id === 'add-to-cart-btn') {
-        let element = $(ev.target),
-            link = window.location.hash,
+        let element = $(ev.target);
+            /*link = window.location.hash,
             slash = link.indexOf('/'),
-            bookId = link.substring(slash + 1);
+            bookId = link.substring(slash + 1);*/
+
+        let bookId = element.attr('book-target');
 
         BC.get(bookId).then(data => {
             let cartInfo = JSON.parse(sessionStorage.getItem('cart')) || [];
@@ -60,7 +53,7 @@ app.bind('click', function (ev) {
     }
 });
 
-app.bind('click', function (ev, test) {
+app.bind('click', function (ev) {
     if (ev.target.id === 'like-btn') {
         console.log(`click ${event.target}`);
         let element = $(event.target),
@@ -215,6 +208,7 @@ $(document).ready(function() {
 
 /* Cart items update */
 $('#cart-btn').on('mouseenter', function () {
+    console.log('asdasd');
     BC.updateCartItems();
 });
 

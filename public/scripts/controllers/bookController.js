@@ -2,7 +2,7 @@ import requester from '../data/requester.js';
 import template from 'template';
 import 'jquery';
 
-const SIZE = 3;
+const SIZE = 12;
 
 class BookController {
 

@@ -4,6 +4,17 @@
     </div>
 
     <div id="books-list-sidebar" class="sidebar col-md-3 pull-right">
+        <div id="search-bar" class="col-md-12">
+            <div class="input-group add-on">
+                <input class="form-control" id="search-value" placeholder="Search books" type="text">
+                <div class="input-group-btn">
+                    <button class="btn btn-success" id="search-btn" type="submit">
+                        <i class="fa fa-search  fa-fw"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
         <aside id="categories-filter">
             <div class="subtitle">
                 <h3>Book Categories</h3>
@@ -21,23 +32,20 @@
     </div>
 
     <div id="books-list-gallery" class="col-md-9">
-        <div class="col-md-4">
-            <div class="input-group add-on">
-                <input class="form-control" id="search-value" placeholder="Search books" type="text">
-                <div class="input-group-btn">
-                    <button class="btn btn-success" id="search-btn" type="submit">Search</button>
-                </div>
-            </div>
-        </div>
+
         <div class="row text-primary">
             {{#each books.book}}
-                <div class="book col-xs-6 col-sm-4 col-md-4 col-lg-2 text-primary" id="{{_id}}">
-                    <img class="book-cover" src="{{_imgURL}}" alt="bookCover">
-                    <ul class='book-info'>
-                        <li> <b>Title: </b><span>{{_title}}</span> </li>
-                        <li> <b>Author: </b><span>{{_author}}</span></li>
-                        <li> <b>Year: </b><span>{{_year}}</span></li>
-                    </ul>
+                <div class="book col-xs-6 col-sm-4 col-md-4  col-lg-4 text-primary" id="{{_id}}">
+                    <div class="book-wrapper">
+                        <a href="#books/{{_id}}">
+                            <img class="book-cover" src="{{_imgURL}}" alt="bookCover">
+                            <ul class='book-info'>
+                                <li class="title">{{_title}}</li>
+                                <li class="price">${{_price}}</li>
+                            </ul>
+                        </a>
+                        <button class="btn btn-blue" id="add-to-cart-btn" type="submit" book-target="{{_id}}">Add to cart</button>
+                    </div>
                 </div>
             {{/each}}
         </div>
