@@ -14,7 +14,6 @@ class BookController {
             requester.get('/books')
                 .then(data => {
                     book = data;
-                    return template.get('book');
                 })
                 .then(
                     requester.get('/categories')
@@ -22,6 +21,9 @@ class BookController {
                             categories = data;
                         })
                 )
+                .then(() => {
+                    return template.get('book');
+                })
                 .then((template) => {
                     let currentPage = book.slice((page - 1) * SIZE, (page - 1) * SIZE + SIZE);
                     let buttonsCount = Array(Math.ceil(book.length / SIZE)).fill(1);
