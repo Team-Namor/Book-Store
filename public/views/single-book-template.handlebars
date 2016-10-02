@@ -1,31 +1,40 @@
 {{#book}}
+<h1 class="page-title">{{_title}}</h1>
 <div class="container" id="single-book-page">
-   <div class="row text-primary">
-       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-5" id="single-book-cover">
-           <img src="{{_imgURL}}" alt="book cover">
-       </div>
-       <div class=" col-xs-0 col-sm-0 col-md-0 col-lg-7 text-primary" id="single-book-info">
-           <h2>{{_title}}</h2>
-           <p>
-               <span class="text-primary"><b>Author: </b>{{_author}}</span>
-               <span><b>Year: </b>{{_year}}</span>
-               <span><b>Category: </b>{{_category}}</span>
-               <span id="bookPrice"><b>Price: </b>{{_price}}$</span>
-           </p>
-           <p>
-               <span><b>Description: </b>{{_description}}</span>
-           </p>
-       </div>
-       <div class="fb-share-button"
-            data-href="https://cdn.rawgit.com/Team-Namor/Book-Store/master/public/index.html"
-            data-layout="button_count">
-       </div>
-       <div class=" col-xs-12 col-sm-12 col-md-12 col-lg-5" id="single-book-info">
-            <button class="btn btn-success" id="like-btn" type="submit">Likes <i id='likes'>{{likes}}</i></button>
-       </div>
-       <div class="  col-lg-2" id="single-book-cart">
-            <button class="btn btn-primary" id="add-to-cart-btn" type="submit">Add to cart</button>
-       </div> 
-     </div>
+    <div class="single-book-wrapper">
+        <div class="row text-primary">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-5" id="single-book-cover">
+                <img src="{{_imgURL}}" alt="book cover">
+            </div>
+            <div class=" col-xs-0 col-sm-0 col-md-0 col-lg-7 text-primary" id="single-book-info">
+                <h2>{{_title}}</h2>
+                <p>
+                    <span class="text-primary"><b>Author: </b>{{_author}}</span>
+                    <span><b>Year: </b>{{_year}}</span>
+                    <span><b>Category: </b>{{_category}}</span>
+                    <span id="bookPrice"><b>Price: </b>{{_price}}$</span>
+                </p>
+                <p>
+                    <span><b>Description: </b>{{_description}}</span>
+                </p>
+
+                <div class="buttons">
+                    <div id="single-book-info">
+                        <button class="btn btn-success" id="like-btn" type="submit">
+                            <i class="fa fa-thumbs-up fa-fw"></i>
+                            Like <i id='likes'>( {{likes}} )</i>
+                        </button>
+                    </div>
+                    <div  id="single-book-cart">
+                        <button class="btn btn-blue" id="add-to-cart-btn" type="submit">
+                            <i class="fa fa-cart-plus fa-fw"></i>
+                            Add to cart
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
 </div>
 {{/book}}
