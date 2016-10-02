@@ -111,7 +111,7 @@ describe('Book shelf tests', function () {
 						.firstCall
 						.args[0];
 
-					expect(actual).to.equal('/books');
+					expect(actual).to.equal('/categories');
 				})
 				.then(done, done);
 		});
@@ -122,7 +122,7 @@ describe('Book shelf tests', function () {
 						.secondCall
 						.args[0];
 
-					expect(actual).to.equal('/categories');
+					expect(actual).to.equal('/books');
 				})
 				.then(done, done);
 		});
