@@ -62,8 +62,7 @@ app.bind('click', function (ev) {
 
 app.bind('click', function (ev, test) {
     if (ev.target.id === 'like-btn') {
-        console.log(`click ${event.target}`);
-        let element = $(event.target),
+        let element = $(ev.target),
             currentLikes = () => element.find('i').text(),
             link = window.location.hash,
             slash = link.indexOf('/'),
