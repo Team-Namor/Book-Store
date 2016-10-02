@@ -11,6 +11,11 @@ handlebars.registerHelper('trimString', function(passedString) {
     return theString + '...'
 });
 
+handlebars.registerHelper('trimCartItem', function(passedString) {
+    var theString = passedString.substring(0,150);
+    return theString + '...'
+});
+
 export  default {
     get(name){
         return new Promise((resolve, reject) => {

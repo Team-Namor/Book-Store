@@ -87,6 +87,24 @@ class BookController {
             increaseLikes
         };
     }
+    
+    updateCartItems(){
+        let currentBooksInCart = JSON.parse(sessionStorage.getItem('cart'));
+        let totalAmount = 0;
+        if (currentBooksInCart !== null) {
+            for (let book of currentBooksInCart) {
+                totalAmount += +book._price;
+            }
+
+            template.get('cart-dropdown').then(template => {
+                let obj = { book: currentBooksInCart, amount: totalAmount };
+                let html = template(obj);
+
+                console.log('+1');
+                $("#dropdown-cart").html(html);
+            });
+        }
+    }
 
     delete() {
         requester.get('/books').then((books) => {

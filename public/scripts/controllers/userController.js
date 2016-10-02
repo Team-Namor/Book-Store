@@ -29,7 +29,8 @@ import 'jquery';
     }
 
     logout(context) {
-         $('.total').html(`$0.00`);
+        $('.total').html(`$0.00`);
+        $("#dropdown-cart").html('');
         sessionStorage.clear();
         requester.get('/logout', context)
             .then(() => { this.showGuestMenu(); })

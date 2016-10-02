@@ -31,6 +31,7 @@ body{
 .btn-blue:hover{
     background-color: #1dbb90;
     border-color: #0cbb83;
+    color:#fff;
 }
 
 #main-wrapper{
@@ -285,4 +286,67 @@ header #main-nav .nav-item a.active{
     font-weight:bold;
     text-align: center;
     margin-top: 10px;
+}
+
+#dropdown-cart{
+    position: absolute;
+    width: 300px;
+    background:#f4f7f9;
+    z-index: 99999;
+    -webkit-box-shadow: 0 3px 10px rgba(0,0,0, 0.15);
+    -moz-box-shadow: 0 3px 10px rgba(0,0,0, 0.15);
+    box-shadow: 0 3px 10px rgba(0,0,0, 0.15);
+}
+
+#dropdown-cart #container{
+    padding: 10px;
+}
+
+#dropdown-cart #container > label{
+    color: #000;
+    font-weight: bold;
+    font-size: 14px;
+    border-bottom: 1px solid #ddd;
+    width: 100%;
+}
+#dropdown-cart .cart-item{
+    float: left;
+    position: relative;
+    width:100%;
+    margin-bottom:5px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 5px;
+}
+#dropdown-cart .cart-item .left{
+    width: 50px;
+    float: left;
+}
+#dropdown-cart .cart-item .right{
+    float: left;
+    width: 230px;
+}
+#dropdown-cart .cart-item .title{
+    width: 100%;
+    overflow: hidden;
+    height: 30px;
+    display: block;
+    padding: 0 10px;
+}
+#dropdown-cart .cart-item .title a{
+    color:black;
+}
+#dropdown-cart .cart-item .quantity{
+    margin-left:10px;
+}
+#dropdown-cart .totals{
+    float: left;
+    position: relative;
+    width: 100%;
+    padding: 5px 0 13px;
+}
+#dropdown-cart .totals .label{
+    font-weight:bold;
+}
+#dropdown-cart #payment-btn{
+    float: right;
 }

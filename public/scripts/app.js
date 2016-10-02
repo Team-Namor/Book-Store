@@ -15,15 +15,6 @@ import CategoryController from 'scripts/controllers/categoryController.js';
 let UC = new UserController();
 let BC = new BookController();
 let CC = new CategoryController();
-let dynamicContainer = $('#dynamic-container');
-let nav = $('ul.nav');
-
-nav.on('click', 'a', ev => {
-    let element = $(ev.target);
-
-    nav.find('a').removeClass('active');
-    element.addClass('active');
-});
 
 let app = new Sammy('#sammy-app');
 
@@ -68,7 +59,7 @@ app.bind('click', function (ev) {
 
 app.bind('click', function (ev, test) {
     if (ev.target.id === 'like-btn') {
-        console.log(`click ${event.target}`)
+        console.log(`click ${event.target}`);
         let element = $(event.target),
             currentLikes = () => element.find('i').text(),
             link = window.location.hash,
@@ -83,26 +74,6 @@ app.bind('click', function (ev, test) {
                 console.log('DB update fail');
             });
     }
-});
-
-$('#cart-btn').on('mouseover', function () {
-    let currentBooksInCart = JSON.parse(sessionStorage.getItem('cart'));
-    let totalAmount = 0;
-    if (currentBooksInCart !== null) {
-        for (let book of currentBooksInCart) {
-            totalAmount += +book._price;
-        }
-
-        template.get('cart-dropdown').then(template => {
-            let obj = { book: currentBooksInCart, amount: totalAmount };
-            let html = template(obj);
-            $("#dropdown-cart").html(html);
-        });
-    }
-});
-
-$('#cart-btn').on('mouseout', function () {
-    $("#dropdown-cart").html('');
 });
 
 app.before({ except: { path: ['#/', '#Login', '#Register'] } }, context => {
@@ -228,11 +199,34 @@ app.get('#Admin', con => {
 app.get('#admin', UC.admin)
 app.run('#/');
 
-/* Events */ //todo move in seperate controller / file wtf ?
+/* Events */
+
 $(document).ready(function() {
     $('.carousel').carousel({
         interval: 4000
     });
+});
+
+/* Cart items update */
+$('#cart-btn').on('mouseenter', function () {
+    BC.updateCartItems();
+});
+
+$('#cart-btn').on('mouseover', function () {
+    $("#dropdown-cart").css('display', 'block');
+});
+
+$('#cart-btn').on('mouseout', function () {
+    $("#dropdown-cart").css('display', 'none');
+});
+
+let nav = $('ul.nav');
+
+nav.on('click', 'a', ev => {
+    let element = $(ev.target);
+
+    nav.find('a').removeClass('active');
+    element.addClass('active');
 });
 
 

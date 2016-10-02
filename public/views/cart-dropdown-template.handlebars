@@ -1,15 +1,22 @@
 <div id='container'>
+     <label>Your orders:</label>
      {{#book}}
-     <div class="left">
-         <img style="width:50px; height:60px" src="{{_imgURL}}" alt="book cover">
-     </div>
-     <div class="right">
-         <span>Title: {{_title}}</span>
-         <span>1x ${{_price}}</span>
-     </div>
+         <div class="cart-item">
+             <div class="left">
+                 <img style="width:50px; height:60px" src="{{_imgURL}}" alt="book cover">
+             </div>
+             <div class="right">
+                 <div class="title">
+                     <a href="#books/{{_id}}">
+                         {{_title}}
+                     </a>
+                 </div>
+                 <div class="quantity">1 x ${{_price}}</div>
+             </div>
+         </div>
      {{/book}}
-     <div>
-         <span>Total amount: {{amount}}</span>
-         <button>Pay</button>
+     <div class="totals">
+         <span><span class="label">Total amount:</span> {{amount}}$</span>
+         <a id="payment-btn" href="#payment" class="btn btn-blue">Payment</a>
      </div>
 </div>
