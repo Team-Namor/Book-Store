@@ -26,7 +26,10 @@ class BookController {
                 })
                 .then((template) => {
                     let currentPage = book.slice((page - 1) * SIZE, (page - 1) * SIZE + SIZE);
-                    let buttonsCount = Array(Math.ceil(book.length / SIZE)).fill(1);
+                    let buttonsCount = Array(Math.ceil(book.length / SIZE));
+                    for (let i = 0; i < buttonsCount.length; i += 1) {
+                        buttonsCount[i] = 1;
+                    }
 
                     let obj = {
                         categories: categories,
@@ -102,7 +105,10 @@ class BookController {
                 })
                 .then((templ) => {
                     let currentPage = book.slice((page - 1) * SIZE, (page - 1) * SIZE + SIZE);
-                    let buttonsCount = Array(Math.ceil(book.length / SIZE)).fill(param);
+                    let buttonsCount = Array(Math.ceil(book.length / SIZE));
+                     for (let i = 0; i < buttonsCount.length; i += 1) {
+                        buttonsCount[i] = param;
+                    }
 
                     let searchedBooksObject = {
                         categories: categories,
