@@ -2,22 +2,39 @@ import requester from '../data/requester.js';
 import template from 'template';
 import 'jquery';
 
-const SIZE = 6;
+const SIZE = 10;
 
 class BookController {
 
     index(page) {
         let book;
+        let categories;
+
         return new Promise((resolve, reject) => {
             requester.get('/books')
+                .then(
+                    requester.get('/categories')
+                        .then(data => {
+                            categories = data;
+                        })
+
+                )
                 .then(data => {
                     book = data;
                     return template.get('book');
-                }).then((template) => {
-                    let pageSize = Math.floor(Math.abs((book.length - SIZE - 1)) / SIZE);
+                })
+                .then((template) => {
                     let currentPage = book.slice((page - 1) * SIZE, (page - 1) * SIZE + SIZE);
                     let buttonsCount = Array(Math.ceil(book.length / SIZE)).fill(1);
-                    let obj = { books: { book: currentPage, size: buttonsCount, hasQuery: false } };
+
+                    let obj = {
+                        books: {
+                            book: currentPage,
+                            size: buttonsCount,
+                            hasQuery: false
+                        },
+                        categories: categories
+                    };
                     let html = template(obj);
                     resolve(html);
                 });
@@ -52,19 +69,34 @@ class BookController {
         });
     }
 
-    searchBy(param, page) {
+    searchBy(param, page, isCategory = false) {
         let book;
         return new Promise((resolve, reject) => {
             requester.get('/books')
                 .then((data) => {
                     let paramToLower = param.toLowerCase();
-                    book = data.filter(b => b._title.toLowerCase().indexOf(paramToLower) > -1 ||
-                        b._author.toLowerCase().indexOf(paramToLower) > -1);
+
+                    console.log("isCat = " + isCategory);
+                    console.log("param = " + paramToLower);
+
+                    if(isCategory) {
+                        book = data.filter(
+                            b =>  b._category.toLowerCase().indexOf(paramToLower) > -1
+                        );
+                    }
+                    else{
+                        book = data.filter(
+                            b => b._title.toLowerCase().indexOf(paramToLower) > -1 ||
+                            b._author.toLowerCase().indexOf(paramToLower) > -1 ||
+                            b._category.toLowerCase().indexOf(paramToLower) > -1
+                        );
+                    }
+
                     return template.get('book');
                 }).then((templ) => {
-                    let pageSize = Math.floor(Math.abs((book.length - SIZE - 1)) / SIZE);
                     let currentPage = book.slice((page - 1) * SIZE, (page - 1) * SIZE + SIZE);
                     let buttonsCount = Array(Math.ceil(book.length / SIZE)).fill(param);
+
                     let searchedBooksObject = { books: { book: currentPage, size: buttonsCount, hasQuery: true } };
                     let html = templ(searchedBooksObject);
                     resolve(html);

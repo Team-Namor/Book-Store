@@ -23,7 +23,10 @@ app.bind('click', function (ev) {
     if (ev.target.id === 'search-btn') {
         let searchedQuery = $('#search-value').val();
         if (searchedQuery !== '') {
-            app.setLocation(`#search/${searchedQuery}&${1}`);
+            app.setLocation(`#search/${searchedQuery}&${1}&${2}`);
+        }
+        else{
+            app.setLocation(`#books/page/1`);
         }
     }
 });
@@ -107,7 +110,6 @@ app.get('#/', function (con) {
                     con.swap(html);
                 });
         });
-
 });
 
 app.get('#books/page/?:page', con => {
@@ -137,10 +139,12 @@ app.post('#books', context => {
     })
 });
 
-app.get('#search/?:query&:page', con => {
-    let query = con.params.query;
-    let page = +con.params.page;
-    BC.searchBy(query, page).then((html) => {
+app.get('#search/?:query&:page&:isCategory', con => {
+    let query = con.params.query,
+        page = +con.params.page,
+        isCateg = con.params.isCategory;
+
+    BC.searchBy(query, page, isCateg).then((html) => {
         con.swap(html);
     });
 });
