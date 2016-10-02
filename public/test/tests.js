@@ -1,5 +1,5 @@
 import BookController from '../scripts/controllers/bookController.js';
-
+import UserController from '../scripts/controllers/userController.js';
 import requester from 'requester';
 import template from 'template';
 
@@ -21,9 +21,14 @@ describe('Book shelf tests', function () {
 				.returns(new Promise((resolve, reject) => {
 					resolve(result);
 				}));
+			sinon.stub(requester, 'post')
+				.returns(new Promise((resolve, reject) => {
+					resolve(result);
+				}));
 		});
 		afterEach(function () {
 			requester.get.restore();
+			requester.post.restore();
 		});
 
 		it('expect bookController.index() to make exactly two get call', function (done) {
@@ -127,49 +132,34 @@ describe('Book shelf tests', function () {
 				})
 				.then(done, done);
 		});
-		// it('expect bookController.add() to make exactly one post call', function (done) {
-		// 	sinon.stub(requester, 'post')
-		// 		.returns(new Promise((resolve, reject) => {
-		// 			resolve(result);
-		// 		}));
+		it('expect bookController.add() to make exactly one post call', function () {
+			let context = {
+				params: {
+					price: 12
+				}
+			};
 
-		// 	let context = {
-		// 		params: {
-		// 			price: 12
-		// 		}
-		// 	};
+			BC.add(context);
+			expect(requester.post.calledOnce).to.be.true;
+		});
+		 it('expect bookController.edit() to make exactly one post call', function () {
+			sinon.stub(requester, 'put')
+				.returns(new Promise((resolve, reject) => {
+					resolve(result);
+				}));
+			BC.edit().increaseLikes(12, 12);
+					expect(requester.put.calledOnce).to.be.true;
 
-		// 	BC.add(context)
-		// 		.then(() => {
-		// 			console.log(requester.post);
-		// 			expect(requester.post.calledOnce).to.be.true;
-		// 		})
-		// 		.then(done, done);
-
-		// 	requester.post.restore();
-		// });
-		//  it('expect bookController.edit() to make exactly one post call', function (done) {
-		// 	sinon.stub(requester, 'put')
-		// 		.returns(new Promise((resolve, reject) => {
-		// 			resolve(result);
-		// 		}));
-		// 	BC.edit().increaseLikes(12, 12)
-		// 		.then(() =>{
-		// 			expect(requester.put.calledOnce).to.be.true;
-		// 		})
-		// 		.then(done, done);
-
-		// 	requester.put.restore();
-		// });
+			requester.put.restore();
+		});
 		it('expect BC.updateCartItems() to call template.get exactly once', function () {
 			sinon.stub(template, 'get')
 				.returns(new Promise((resolve, reject) => {
-					resolve(result);
+					resolve(function () { });
 				}));
 			sessionStorage.setItem('cart', JSON.stringify([]));
 
 			BC.updateCartItems();
-			console.log(template.get);
 			expect(template.get.calledOnce).to.be.true;
 
 			sessionStorage.clear();
@@ -182,36 +172,27 @@ describe('Book shelf tests', function () {
 				}));
 
 			BC.updateCartItems();
-			console.log(template.get);
 			expect(template.get.calledOnce).to.be.false;
 
 			template.get.restore();
 		});
 
 		describe('UserController tests', function () {
-			it('expect UserController.add() to make exactly one post call', function (done) {
-				sinon.stub(requester, 'post')
-					.returns(new Promise((resolve, reject) => {
-						resolve(result);
-					}));
+			let UC = new UserController();
+			const params = { redirect: function () { } };
 
-				let context = {
-					params: {
-						price: 12
-					}
-				};
-
-				BC.add(context)
-					.then(() => {
-						console.log(requester.post);
-						expect(requester.post.calledOnce).to.be.true;
-					})
-					.then(done, done);
-
-				requester.post.restore();
+			it('expect UserController.add() to make exactly one post call', function () {
+				UC.add(params);
+				expect(requester.post.calledOnce).to.be.true;
 			});
+			it('expect UserController.add() to make correct post call', function () {
+				UC.add(params);
+				const actual = requester.post
+					.firstCall
+					.args[0];
 
-
+				expect(actual).to.equal('/register');
+			});
 		});
 	});
 });

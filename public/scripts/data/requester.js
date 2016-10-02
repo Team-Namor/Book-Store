@@ -14,6 +14,7 @@ let requester = {
     },
 
     post(url, data){
+        console.log(true);
                 return new Promise((resolve, reject) => {
             $.ajax({
                 url,
