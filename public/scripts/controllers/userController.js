@@ -40,7 +40,11 @@ import 'jquery';
             })
     }
 
-    admin(context){
+    admin(context) {
+        if(context.userType !== 'admin'){
+            popUp.alert('admin only');
+            context.redirect('#/');
+        }
         template.get('admin-dashboard')
         .then(template => {
             let html = template();
