@@ -23,13 +23,13 @@ class CategoryController {
     searchBooksByCategory(context, categoryName) {
         Promise.all([requester.get('/books'), template.get('booksByCategory')])
             .then(([books, template]) => {
-                let filteredBooks = books.find(book=>book._category === categoryName);
+                let filteredBooks = books.filter(book=>book._category === categoryName);
                 let obj={
-                    books:[filteredBooks]
+                    books:filteredBooks
                 };
 
                 let html = template(obj);
-               context.$element().append(html);
+               context.$element().find('#selected-books').html(html);
             });
     }
 }

@@ -1,3 +1,4 @@
+{{#if books}}
  <div class="row">
         {{#each books}}
             {{#if _title}}
@@ -9,8 +10,6 @@
                     <li><b>Year: </b><span>{{_year}}</span></li>
                 </ul>
             </div>
-            {{else}}
-                <div><h2>No books in this category</h2></div>
             {{/if}}
         {{/each}}
     </div>
@@ -28,3 +27,8 @@
             {{/if}}
         </ul>
     </div>
+ {{else}}
+    <div>
+        <h2>No books in this category</h2>
+    </div>
+{{/if}}

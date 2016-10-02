@@ -181,7 +181,7 @@ app.get('#categories', con => {
 app.get('#categories/:category', con => {
     let categoryName = con.params.category;
 
-    CC.index(con);
+
     CC.searchBooksByCategory(con, categoryName);
 });
 

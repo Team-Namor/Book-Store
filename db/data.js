@@ -41,7 +41,7 @@ let data = {
                 if (err) {
                     reject(err);
                 } else {
-                    resolve(book);
+                    resolve(newBook);
                 }
             });
         });
@@ -131,6 +131,18 @@ let data = {
                 }
             });
         });
+    },
+
+    checkCategoryExisting(categoryName){
+        return new Promise((resolve,reject) => {
+            db.categories.findOne({_name: categoryName}, (err, category) => {
+                if(err){
+                    reject(err);
+                }else{
+                    resolve(category);
+                }
+            })
+        })
     }
 };
 

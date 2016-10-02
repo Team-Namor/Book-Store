@@ -1,9 +1,12 @@
 let data = require('../../db/data.js');
+let Book = require('../../db/models/book');
+let getNewCategory = require('../../db/models/category');
 
 let bookController = {
     get(req, res) {
         data.getBooks()
-            .then(books => res.json(books))
+            .then(books => {
+                res.json(books)})
             .catch(err => { res.status(500).send(err.message); });
     },
 
@@ -14,10 +17,18 @@ let bookController = {
     },
 
     add(req, res) {
-        let book = req.body;
+        let book = new Book(req.body.title, req.body.author, req.body.year,req.body.category, req.body.description,req.body.imgURL, req.body.price);
+        let category = getNewCategory(req.body.category);
 
         data.addBook(book)
-            .then(data => res.json(data))
+            .then( newBook => {
+                res.json(newBook);
+                data.checkCategoryExisting(category.name).then(newCategory => {
+                    if(!newCategory){
+                        data.postCategory(category);
+                    }
+                })            
+            })
             .catch(err => { res.status(500).send(err.message); });
     },
     put(req, res) {

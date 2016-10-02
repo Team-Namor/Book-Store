@@ -1,8 +1,11 @@
 <h2 id="header-books">Categories in our store</h2>
+<div class="list-group col-sm-4">
+       
 {{#category}}
-    <div class="category col-md-2">
-        <ul class='category-info'>
-            <li class="btn"><a class="btn btn-success" href="/#categories/{{_name}}">{{_name}}</a> </li>
-        </ul>
-    </div>
+    
+            <a class="list-group-item list-group-item-action bg-success " href="/#categories/{{_name}}">{{_name}}</a> 
+
 {{/category}}
+      
+    </div>
+    <div id="selected-books" class="col-sm-8"></div>

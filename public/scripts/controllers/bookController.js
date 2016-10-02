@@ -65,6 +65,7 @@ class BookController {
     }
 
     add(context) {
+        context.params.price = parseFloat(context.params.price);
         return  requester.post('/books', context.params);       
     }
 
