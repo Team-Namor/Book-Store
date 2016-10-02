@@ -25,11 +25,20 @@ class BookController {
     }
 
     get(id) {
-        let book;
         return new Promise((resolve, reject) => {
             requester.get('/books/' + id)
                 .then(data => {
                      resolve(data);
+                });
+        });
+    }
+
+    getRandom() {
+        return new Promise((resolve, reject) => {
+            requester.get('/books')
+                .then(data => {
+                    resolve(data[Math.floor(Math.random() * data.length)]);
+                    console.dir(data[Math.floor(Math.random() * data.length)])
                 });
         });
     }

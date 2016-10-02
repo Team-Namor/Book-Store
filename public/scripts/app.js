@@ -128,10 +128,13 @@ app.before({ except: { path: ['#/', '#Login', '#Register'] } }, context => {
 });
 
 app.get('#/', function (con) {
-    template.get('home').then(temp => {
-        let html = temp({ name: 'MAIN' });
-        con.swap(html);
-    });
+    BC.getRandom()
+        .then((book) => {
+            BC.attachToTemplate(book, 'home')
+                .then(html => {
+                    con.swap(html);
+                });
+        });
 });
 
 app.get('#books/page/?:page', con => {
