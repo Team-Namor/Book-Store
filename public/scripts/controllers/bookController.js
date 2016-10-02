@@ -10,17 +10,17 @@ class BookController {
         let book;
         let categories;
 
+        /* Get all categories */
+        let categoriesPromise = requester.get('/categories');
+        categoriesPromise.then(data => {
+            categories = data;
+        });
+
         return new Promise((resolve, reject) => {
             requester.get('/books')
                 .then(data => {
                     book = data;
                 })
-                .then(
-                    requester.get('/categories')
-                        .then(data => {
-                            categories = data;
-                        })
-                )
                 .then(() => {
                     return template.get('book');
                 })
