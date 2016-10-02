@@ -29,9 +29,8 @@ import 'jquery';
     }
 
     logout(context) {
-        $('.total').html(`$0.00`);
-        $("#dropdown-cart").html('');
-        sessionStorage.clear();
+        this.clearCart();
+
         requester.get('/logout', context)
             .then(() => { this.showGuestMenu(); })
             .then(() => {
@@ -60,6 +59,12 @@ import 'jquery';
          $('#menu-user-register').show();
          $('#menu-user-logout').hide();
          $('#admin-nav-item').hide();
+     }
+
+     clearCart() {
+         $('.total').html(`$0.00`);
+         $("#dropdown-cart").html('');
+         sessionStorage.clear();
      }
 }
 

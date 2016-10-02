@@ -99,6 +99,7 @@ app.before({ except: { path: ['#/', '#Login', '#Register'] } }, context => {
 });
 
 app.get('#/', function (con) {
+    SetActiveLink('/');
     BC.getRandom()
         .then((book) => {
             BC.attachToTemplate(book, 'home')
@@ -106,9 +107,11 @@ app.get('#/', function (con) {
                     con.swap(html);
                 });
         });
+
 });
 
 app.get('#books/page/?:page', con => {
+    SetActiveLink('books/page/1');
     let page = +con.params.page;
     BC.index(page)
         .then(html => {
@@ -196,11 +199,10 @@ app.get('#Admin', con => {
 
 /* Admin */
 
-app.get('#admin', UC.admin)
+app.get('#admin', UC.admin);
 app.run('#/');
 
 /* Events */
-
 $(document).ready(function() {
     $('.carousel').carousel({
         interval: 4000
@@ -220,7 +222,7 @@ $('#cart-btn').on('mouseout', function () {
     $("#dropdown-cart").css('display', 'none');
 });
 
-let nav = $('ul.nav');
+let nav = $('#main-nav');
 
 nav.on('click', 'a', ev => {
     let element = $(ev.target);
@@ -229,4 +231,10 @@ nav.on('click', 'a', ev => {
     element.addClass('active');
 });
 
+function SetActiveLink(name){
+    let nav = $('#main-nav');
+    nav.find('a').removeClass('active');
+
+    nav.find('a[href="#'+name+'"]').addClass('active');
+}
 

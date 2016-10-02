@@ -38,7 +38,6 @@ class BookController {
             requester.get('/books')
                 .then(data => {
                     resolve(data[Math.floor(Math.random() * data.length)]);
-                    console.dir(data[Math.floor(Math.random() * data.length)])
                 });
         });
     }
