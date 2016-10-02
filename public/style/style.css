@@ -350,3 +350,39 @@ header #main-nav .nav-item a.active{
 #dropdown-cart #payment-btn{
     float: right;
 }
+
+/* Books list */
+#books-list-sidebar{
+    border-radius: 15px;
+    background:#fff;
+    padding: 1.875em;
+    margin-top:20px;
+}
+#books-list-sidebar .categories-list ul{
+    list-style-type: none;
+    padding: 0px;
+}
+#books-list-sidebar .categories-list ul li{
+    color:#018763;
+    cursor:pointer;
+    height:35px;
+}
+#books-list-sidebar .categories-list ul li a{
+    color:#018763;
+    cursor:pointer;
+}
+#books-list-sidebar .categories-list ul li a:hover{
+    color:#1dbb90;
+}
+#books-list-sidebar .categories-list ul li:before {
+    content: "• ";
+    font-size: 30px;
+    color: #018763;
+    top: 4px;
+    position: relative;
+}
+#books-list-sidebar .subtitle > h3{
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+    margin-bottom: 0;
+}

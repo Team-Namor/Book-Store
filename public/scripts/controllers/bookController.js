@@ -74,6 +74,12 @@ class BookController {
         let book,
             categories;
 
+        /* Get all categories */
+        let categoriesPromise = requester.get('/categories');
+        categoriesPromise.then(data => {
+            categories = data;
+        });
+
         return new Promise((resolve, reject) => {
             requester.get('/books')
                 .then((data) => {
@@ -94,13 +100,6 @@ class BookController {
 
                     return template.get('book');
                 })
-                .then(
-                    requester.get('/categories')
-                        .then(data => {
-                            categories = data;
-                        })
-
-                )
                 .then((templ) => {
                     let currentPage = book.slice((page - 1) * SIZE, (page - 1) * SIZE + SIZE);
                     let buttonsCount = Array(Math.ceil(book.length / SIZE)).fill(param);

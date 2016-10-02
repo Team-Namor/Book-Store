@@ -1,55 +1,70 @@
 <div class="container">
     <div class="row">
-        <h2 id="header-books">Books in our store</h2>
+        <h1 id="header-books" class="page-title">Books in our store</h1>
+    </div>
+
+    <div id="books-list-sidebar" class="sidebar col-md-3 pull-right">
+        <aside id="categories-filter">
+            <div class="subtitle">
+                <h3>Book Categories</h3>
+            </div>
+            <div class="categories-list">
+                <ul>
+                    {{#each categories}}
+                        <li class="cat-list-item">
+                            <a href="/#search/{{_name}}&1&true">{{_name}}</a>
+                        </li>
+                    {{/each}}
+                </ul>
+            </div>
+        </aside>
+    </div>
+
+    <div id="books-list-gallery" class="col-md-9">
         <div class="col-md-4">
-           <div class="input-group add-on">
-               <input class="form-control" id="search-value" placeholder="Search books" type="text">
-               <div class="input-group-btn">
-                   <button class="btn btn-success" id="search-btn" type="submit">Search</button>
-               </div>
-           </div>
+            <div class="input-group add-on">
+                <input class="form-control" id="search-value" placeholder="Search books" type="text">
+                <div class="input-group-btn">
+                    <button class="btn btn-success" id="search-btn" type="submit">Search</button>
+                </div>
+            </div>
         </div>
-    </div>
-    <div class="sidebar">
-        {{#each categories}}
-            <a class="list-group-item list-group-item-action bg-success " href="/#search/{{_name}}&1&true">{{_name}}</a>
-        {{/each}}
-    </div>
-    <div class="row text-primary">
-    {{#each books.book}}
-        <div class="book col-xs-6 col-sm-4 col-md-4 col-lg-2 text-primary" id="{{_id}}">
-            <img class="book-cover" src="{{_imgURL}}" alt="bookCover">
-            <ul class='book-info'>
-                <li> <b>Title: </b><span>{{_title}}</span> </li>
-                <li> <b>Author: </b><span>{{_author}}</span></li>
-                <li> <b>Year: </b><span>{{_year}}</span></li>
+        <div class="row text-primary">
+            {{#each books.book}}
+                <div class="book col-xs-6 col-sm-4 col-md-4 col-lg-2 text-primary" id="{{_id}}">
+                    <img class="book-cover" src="{{_imgURL}}" alt="bookCover">
+                    <ul class='book-info'>
+                        <li> <b>Title: </b><span>{{_title}}</span> </li>
+                        <li> <b>Author: </b><span>{{_author}}</span></li>
+                        <li> <b>Year: </b><span>{{_year}}</span></li>
+                    </ul>
+                </div>
+            {{/each}}
+        </div>
+        <div class="row">
+            <ul class="pagination">
+                <!--<li class="page-item">
+                     <a class="page-link" href="#" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                        <span class="sr-only">Previous</span>
+                     </a>
+                </li>-->
+                {{#if books.hasQuery}}
+                    {{#each books.size}}
+                        <li class="page-item"><a href="#search/{{this}}&{{inc @index}}" class="page-link" >{{inc @index}}</a></li>
+                    {{/each}}
+                {{else}}
+                    {{#each books.size}}
+                        <li class="page-item"><a href="#books/page/{{inc @index}}" class="page-link" >{{inc @index}}</a></li>
+                    {{/each}}
+                {{/if}}
+                <!--<li class="page-item">
+                   <a class="page-link" href="#" aria-label="Next">
+                       <span aria-hidden="true">&raquo;</span>
+                       <span class="sr-only">Next</span>
+                   </a>
+                </li>-->
             </ul>
         </div>
-    {{/each}}
-    </div>
-    <div class="row">
-        <ul class="pagination">
-            <!--<li class="page-item">
-                 <a class="page-link" href="#" aria-label="Previous">
-                    <span aria-hidden="true">&laquo;</span>
-                    <span class="sr-only">Previous</span>
-                 </a>
-            </li>-->
-            {{#if books.hasQuery}}
-                 {{#each books.size}}
-                 <li class="page-item"><a href="#search/{{this}}&{{inc @index}}" class="page-link" >{{inc @index}}</a></li>
-                 {{/each}}
-            {{else}}
-                 {{#each books.size}}
-                 <li class="page-item"><a href="#books/page/{{inc @index}}" class="page-link" >{{inc @index}}</a></li>
-                 {{/each}}
-            {{/if}}
-            <!--<li class="page-item">
-               <a class="page-link" href="#" aria-label="Next">
-                   <span aria-hidden="true">&raquo;</span>
-                   <span class="sr-only">Next</span>
-               </a>
-            </li>-->
-        </ul>
     </div>
 </div>
