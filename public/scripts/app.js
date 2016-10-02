@@ -65,15 +65,15 @@ app.bind('click', function (ev) {
 app.bind('click', function (ev) {
     if (ev.target.id === 'like-btn') {
         let element = $(ev.target),
-            currentLikes = () => element.find('i').text(),
+           currentLikes = element.children('#likes').text().substr(2, 1),
             link = window.location.hash,
             slash = link.indexOf('/'),
             bookId = link.substring(slash + 1);
-
-        BC.edit().increaseLikes(bookId, +(currentLikes()) + 1)
+            
+        BC.edit().increaseLikes(bookId, +currentLikes + 1)
             .then(success => {
                 if (success === 1) {
-                    return element.find('i').text(+(currentLikes()) + 1);
+                    return element.children('#likes').text(`( ${+currentLikes + 1} )`);
                 }
                 console.log('DB update fail');
             });

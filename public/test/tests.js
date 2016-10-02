@@ -142,13 +142,13 @@ describe('Book shelf tests', function () {
 			BC.add(context);
 			expect(requester.post.calledOnce).to.be.true;
 		});
-		 it('expect bookController.edit() to make exactly one post call', function () {
+		it('expect bookController.edit() to make exactly one post call', function () {
 			sinon.stub(requester, 'put')
 				.returns(new Promise((resolve, reject) => {
 					resolve(result);
 				}));
 			BC.edit().increaseLikes(12, 12);
-					expect(requester.put.calledOnce).to.be.true;
+			expect(requester.put.calledOnce).to.be.true;
 
 			requester.put.restore();
 		});
