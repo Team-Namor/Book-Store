@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node app/app.js",
-    "test" : "start chrome http://127.0.0.1:8080/public/test/tests.html && http-server"
+    "test" : "start chrome http://127.0.0.1:8080/test/tests.html && http-server"
   },
   "author": "",
   "license": "ISC",

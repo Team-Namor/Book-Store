@@ -1,4 +1,5 @@
 import BookController from '../scripts/controllers/bookController.js';
+
 import requester from 'requester';
 import template from 'template';
 
@@ -125,6 +126,92 @@ describe('Book shelf tests', function () {
 					expect(actual).to.equal('/books');
 				})
 				.then(done, done);
+		});
+		// it('expect bookController.add() to make exactly one post call', function (done) {
+		// 	sinon.stub(requester, 'post')
+		// 		.returns(new Promise((resolve, reject) => {
+		// 			resolve(result);
+		// 		}));
+
+		// 	let context = {
+		// 		params: {
+		// 			price: 12
+		// 		}
+		// 	};
+
+		// 	BC.add(context)
+		// 		.then(() => {
+		// 			console.log(requester.post);
+		// 			expect(requester.post.calledOnce).to.be.true;
+		// 		})
+		// 		.then(done, done);
+
+		// 	requester.post.restore();
+		// });
+		//  it('expect bookController.edit() to make exactly one post call', function (done) {
+		// 	sinon.stub(requester, 'put')
+		// 		.returns(new Promise((resolve, reject) => {
+		// 			resolve(result);
+		// 		}));
+		// 	BC.edit().increaseLikes(12, 12)
+		// 		.then(() =>{
+		// 			expect(requester.put.calledOnce).to.be.true;
+		// 		})
+		// 		.then(done, done);
+
+		// 	requester.put.restore();
+		// });
+		it('expect BC.updateCartItems() to call template.get exactly once', function () {
+			sinon.stub(template, 'get')
+				.returns(new Promise((resolve, reject) => {
+					resolve(result);
+				}));
+			sessionStorage.setItem('cart', JSON.stringify([]));
+
+			BC.updateCartItems();
+			console.log(template.get);
+			expect(template.get.calledOnce).to.be.true;
+
+			sessionStorage.clear();
+			template.get.restore();
+		});
+		it('expect BC.updateCartItems() to not call template.get', function () {
+			sinon.stub(template, 'get')
+				.returns(new Promise((resolve, reject) => {
+					resolve(result);
+				}));
+
+			BC.updateCartItems();
+			console.log(template.get);
+			expect(template.get.calledOnce).to.be.false;
+
+			template.get.restore();
+		});
+
+		describe('UserController tests', function () {
+			it('expect UserController.add() to make exactly one post call', function (done) {
+				sinon.stub(requester, 'post')
+					.returns(new Promise((resolve, reject) => {
+						resolve(result);
+					}));
+
+				let context = {
+					params: {
+						price: 12
+					}
+				};
+
+				BC.add(context)
+					.then(() => {
+						console.log(requester.post);
+						expect(requester.post.calledOnce).to.be.true;
+					})
+					.then(done, done);
+
+				requester.post.restore();
+			});
+
+
 		});
 	});
 });
