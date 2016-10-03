@@ -536,7 +536,7 @@ header #main-nav .nav-item a.active{
         left: 0;
     }
     #book-caption-text p{
-        display: none;
+        /*display: none;*/
     }
 }
 
