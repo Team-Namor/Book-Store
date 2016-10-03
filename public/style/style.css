@@ -500,6 +500,12 @@ header #main-nav .nav-item a.active{
     top: 50px;
     position: relative;
 }
+@media only screen and (max-width: 480px) {
+    header #main-nav .nav-item a{
+        padding:0 2px;
+    }
+}
+
 
 @media only screen and (max-width: 768px) {
     #main-nav-wrap{
@@ -528,5 +534,16 @@ header #main-nav .nav-item a.active{
         right: 60%;
         top: 4%;
         left: 0;
+    }
+    #book-caption-text p{
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 992px) {
+    #books-list-sidebar .categories-list ul li {
+        width: 25%;
+        float: left;
+        position: relative;
     }
 }

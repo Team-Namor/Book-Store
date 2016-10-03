@@ -3,7 +3,7 @@
         <h1 id="header-books" class="page-title">Books in our store</h1>
     </div>
 
-    <div id="books-list-sidebar" class="sidebar col-md-3 pull-right">
+    <div id="books-list-sidebar" class="sidebar col-md-12 col-lg-3 pull-right">
         <div id="search-bar" class="col-md-12">
             <div class="input-group add-on">
                 <input class="form-control" id="search-value" placeholder="Search books" type="text">
@@ -31,11 +31,11 @@
         </aside>
     </div>
 
-    <div id="books-list-gallery" class="col-md-9">
+    <div id="books-list-gallery" class="col-md-12 col-lg-9">
 
         <div class="row text-primary">
             {{#each books.book}}
-                <div class="book col-xs-6 col-sm-4 col-md-4  col-lg-4 text-primary" id="{{_id}}">
+                <div class="book col-xs-12 col-sm-6 col-md-4  col-lg-4 text-primary" id="{{_id}}">
                     <div class="book-wrapper">
                         <a href="#books/{{_id}}">
                             <img class="book-cover" src="{{_imgURL}}" alt="bookCover">
