@@ -272,7 +272,8 @@ header #main-nav .nav-item a.active{
     top: 4%;
 }
 #book-caption-image img{
-    height: 330px;
+    /*height: 330px;*/
+    height: 104%;
     animation-delay: 2s;
 }
 #book-caption-text{
@@ -493,4 +494,39 @@ header #main-nav .nav-item a.active{
 #fb-share{
     position: relative;
     margin-top: 3px;
+}
+#mobile-nav-trigger{
+    float: right;
+    top: 50px;
+    position: relative;
+}
+
+@media only screen and (max-width: 768px) {
+    #main-nav-wrap{
+        float: left;
+        position: relative;
+        width:100%;
+    }
+    #main-nav{
+        top:0 !important;
+        float: left;
+        position: relative;
+        width:100%;
+        margin-bottom: 25px;
+    }
+    #fb-share{
+        display: none;
+    }
+    #book-caption-text p {
+        height: 108px;
+        overflow: hidden;
+    }
+    #book-view-btn {
+        right: 38%;
+    }
+    #book-caption-image {
+        right: 60%;
+        top: 4%;
+        left: 0;
+    }
 }
