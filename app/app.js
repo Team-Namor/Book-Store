@@ -22,8 +22,8 @@ app.use(session({
 require('./router/router')(app);
 
 /* Run */
-app.listen(3333, function () {
-    console.log(`Server is running at http://localhost:3333`);
+app.listen(process.env.PORT || 3333, function () {
+    console.log(`Server is running at ${process.env.PORT || 3333});
 });
 
 
