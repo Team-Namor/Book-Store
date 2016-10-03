@@ -20,5 +20,8 @@
     "systemjs-plugin-babel": "0.0.15",
     "validate-obj": "^0.8.5",
     "validator": "^6.0.0"
+  },
+  "engines":{
+    "node": "6.5.0"
   }
 }
